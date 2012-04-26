@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Mikadocs.OEE" assembly="Mikadocs.OEE">
+  <class name="ProductionTeam">
+    <id name="Id" access="nosetter.camelcase" column="ID">
+      <generator class="native" />
+    </id>
+    <version name="Version" access="nosetter.camelcase" />
+
+    <property name="GlobalId" access="nosetter.camelcase" />
+    <property name="Name" unique="true"/>    
+  </class>
+</hibernate-mapping>

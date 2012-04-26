@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Mikadocs.OEE" assembly="Mikadocs.OEE">
+  <class name="ProductionLeg">
+    <id name="Id" access="nosetter.camelcase" column="ID">
+      <generator class="native" />
+    </id>
+    <version name="Version" access="nosetter.camelcase" />
+
+    <many-to-one name="Shift" column="ProductionShiftId" access="nosetter.camelcase" lazy="false"/> 
+    <property name="ProductionStart" access="nosetter.camelcase" />
+    <property name="ProductionEnd" access="nosetter.camelcase"/>
+    <property name="CounterStart" access="nosetter.camelcase"/>
+    <property name="CounterEnd" access="nosetter.camelcase"/>
+    <property name="DiscardedItems" access="nosetter.camelcase"/>
+
+    <bag name="ProductionStopRegistrationList" access="field.camelcase" table="ProductionStopRegistration" lazy="false">
+      <key column="ProductionLegId" />
+      <composite-element class="Mikadocs.OEE.ProductionStopRegistration, Mikadocs.OEE">
+        <many-to-one name="Stop" column="ProductionStopId" access="nosetter.camelcase" lazy="false"/>
+        <property name="Duration" access="nosetter.camelcase" />
+      </composite-element>
+    </bag>
+
+  </class>
+</hibernate-mapping>

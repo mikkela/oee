@@ -1,0 +1,87 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE", "Mikadocs.OEE\Mikadocs.OEE.csproj", "{5A737B92-FAC2-455D-99B9-E45D2FB821FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE.Test", "Test\Unit\Mikadocs.OEE.Test\Mikadocs.OEE.Test.csproj", "{94A32B2D-3496-4991-ACDA-1319B4ED1E5F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EE293EAD-1865-4D75-BCE3-CE0AF7E45AA1}"
+	ProjectSection(SolutionItems) = preProject
+		Lib\Castle.Core.dll = Lib\Castle.Core.dll
+		Lib\Castle.DynamicProxy.license.txt = Lib\Castle.DynamicProxy.license.txt
+		Lib\Castle.DynamicProxy2.dll = Lib\Castle.DynamicProxy2.dll
+		Lib\Iesi.Collections.dll = Lib\Iesi.Collections.dll
+		Lib\Iesi.Collections.license.txt = Lib\Iesi.Collections.license.txt
+		Lib\log4net.dll = Lib\log4net.dll
+		Lib\log4net.license.txt = Lib\log4net.license.txt
+		Mikadocs.OEE.vsmdi = Mikadocs.OEE.vsmdi
+		Lib\NHibernate.dll = Lib\NHibernate.dll
+		Lib\NHibernate.license.txt = Lib\NHibernate.license.txt
+		setup.sql = setup.sql
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE.Repository", "Mikadocs.OEE.Repository\Mikadocs.OEE.Repository.csproj", "{55D362C3-9048-4997-9ABD-58E84B6F4F3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE.Repository.Test", "Test\Unit\Mikadocs.OEE.Repository.Test\Mikadocs.OEE.Repository.Test.csproj", "{F7C4759F-F248-4BC0-A656-B776049D8ADE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE.DataEntry", "Mikadocs.OEE.DataEntry\Mikadocs.OEE.DataEntry.csproj", "{19D060A0-0358-4325-832A-8594E7AA27BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE.ManagementConsole", "Mikadocs.OEE.ManagementConsole\Mikadocs.OEE.ManagementConsole.csproj", "{86DCDD35-FF51-490A-9D83-5CF5A8C3DE5B}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Mikadocs.OEE.DataEntry.Setup", "Mikadocs.OEE.DataEntry.Setup\Mikadocs.OEE.DataEntry.Setup.vdproj", "{B962C8DC-8A89-44DB-9FD5-FCBB0927B3E5}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Mikadocs.OEE.ManagementConsole.Setup", "Mikadocs.OEE.ManagementConsole.Setup\Mikadocs.OEE.ManagementConsole.Setup.vdproj", "{8E7F4A66-0152-4730-A37D-30DCC3207E29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE.CostCalculator", "Mikadocs.OEE.CostCalculator\Mikadocs.OEE.CostCalculator.csproj", "{A0A22D19-105E-4BF0-AB54-084EFA2461B5}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Mikadocs.OEE.CostCalculator.Setup", "Mikadocs.OEE.CostCalculator.Setup\Mikadocs.OEE.CostCalculator.Setup.vdproj", "{216DEF37-BF44-4AA1-B912-954C154D1678}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A737B92-FAC2-455D-99B9-E45D2FB821FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A737B92-FAC2-455D-99B9-E45D2FB821FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A737B92-FAC2-455D-99B9-E45D2FB821FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A737B92-FAC2-455D-99B9-E45D2FB821FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94A32B2D-3496-4991-ACDA-1319B4ED1E5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94A32B2D-3496-4991-ACDA-1319B4ED1E5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94A32B2D-3496-4991-ACDA-1319B4ED1E5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94A32B2D-3496-4991-ACDA-1319B4ED1E5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55D362C3-9048-4997-9ABD-58E84B6F4F3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55D362C3-9048-4997-9ABD-58E84B6F4F3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55D362C3-9048-4997-9ABD-58E84B6F4F3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55D362C3-9048-4997-9ABD-58E84B6F4F3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7C4759F-F248-4BC0-A656-B776049D8ADE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7C4759F-F248-4BC0-A656-B776049D8ADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7C4759F-F248-4BC0-A656-B776049D8ADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7C4759F-F248-4BC0-A656-B776049D8ADE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19D060A0-0358-4325-832A-8594E7AA27BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19D060A0-0358-4325-832A-8594E7AA27BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19D060A0-0358-4325-832A-8594E7AA27BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19D060A0-0358-4325-832A-8594E7AA27BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86DCDD35-FF51-490A-9D83-5CF5A8C3DE5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86DCDD35-FF51-490A-9D83-5CF5A8C3DE5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86DCDD35-FF51-490A-9D83-5CF5A8C3DE5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86DCDD35-FF51-490A-9D83-5CF5A8C3DE5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B962C8DC-8A89-44DB-9FD5-FCBB0927B3E5}.Debug|Any CPU.ActiveCfg = Debug
+		{B962C8DC-8A89-44DB-9FD5-FCBB0927B3E5}.Release|Any CPU.ActiveCfg = Release
+		{8E7F4A66-0152-4730-A37D-30DCC3207E29}.Debug|Any CPU.ActiveCfg = Debug
+		{8E7F4A66-0152-4730-A37D-30DCC3207E29}.Release|Any CPU.ActiveCfg = Release
+		{A0A22D19-105E-4BF0-AB54-084EFA2461B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0A22D19-105E-4BF0-AB54-084EFA2461B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0A22D19-105E-4BF0-AB54-084EFA2461B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0A22D19-105E-4BF0-AB54-084EFA2461B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{216DEF37-BF44-4AA1-B912-954C154D1678}.Debug|Any CPU.ActiveCfg = Debug
+		{216DEF37-BF44-4AA1-B912-954C154D1678}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		BuildVersion_UpdateFileVersion = False
+		BuildVersion_UpdateAssemblyVersion = False
+	EndGlobalSection
+EndGlobal

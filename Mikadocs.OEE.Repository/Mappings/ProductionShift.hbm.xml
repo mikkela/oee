@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Mikadocs.OEE" assembly="Mikadocs.OEE">
+  <class name="ProductionShift">
+    <id name="Id" access="nosetter.camelcase" column="ID">
+      <generator class="native" />
+    </id>
+    <version name="Version" access="nosetter.camelcase" />
+
+    <many-to-one name="Production" column="ProductionId" access="nosetter.camelcase" lazy="false"/>
+    <many-to-one name="Team" column="ProductionTeamId" access="nosetter.camelcase" lazy="false"/>
+    <property name="Date" column="ProductionDate" access="nosetter.camelcase" />
+
+    <bag name="ProductionLegList" access="field.camelcase" lazy="false">
+      <key column="ProductionShiftId" />
+      <one-to-many class="Mikadocs.OEE.ProductionLeg, Mikadocs.OEE" />
+    </bag>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Availability" xml:space="preserve">
+    <value>Tilgængelighed</value>
+  </data>
+  <data name="ContinueProductionHeader" xml:space="preserve">
+    <value>Ønsker du at fortsætte?</value>
+  </data>
+  <data name="ContinueProductionMessage" xml:space="preserve">
+    <value>Ønsker du at fortsætte den igangværende produktion (ordre: {0} / produkt: {1})</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Copyright Mikado Consult 2009
+mikkel@mikadocs.com</value>
+  </data>
+  <data name="CouldNotAddProductionShift" xml:space="preserve">
+    <value>Kunne ikke tilføje skiftet. Prøv igen og tjek de indtastede værdier før du trykker OK</value>
+  </data>
+  <data name="CouldNotAddProductionStop" xml:space="preserve">
+    <value>Kunne ikke tilføje produtionsstoppet. Prøv igen og tjek de indtastede værdier før du trykker OK</value>
+  </data>
+  <data name="CouldNotCreateNewProduction" xml:space="preserve">
+    <value>Den nye produktion kunne ikke oprettes. Prøv igen og tjek de indtastede værdier før du trykker OK</value>
+  </data>
+  <data name="CouldNotUpdateProductionCounters" xml:space="preserve">
+    <value>Produktionsværdierne kunne ikke opdateres. Prøv igen og tjek de indtastede værdier før du trykker OK</value>
+  </data>
+  <data name="CurrentShift" xml:space="preserve">
+    <value>Nuværende skift</value>
+  </data>
+  <data name="DataEntryHeader" xml:space="preserve">
+    <value>Maskine {0} - Produkt {1} - Ordre {2}</value>
+  </data>
+  <data name="DiscardedBeltItems" xml:space="preserve">
+    <value>Kasseret antal ved bånd</value>
+  </data>
+  <data name="DiscardedItems" xml:space="preserve">
+    <value>Kasseret antal</value>
+  </data>
+  <data name="DiscardedMachineItems" xml:space="preserve">
+    <value>Kasseret antal ved maskine</value>
+  </data>
+  <data name="EnterExistingOrderNumber" xml:space="preserve">
+    <value>Ønsker du at fortsætte en eksisterende ordre, indtast nummeret og tryk OK. Ellers luk.</value>
+  </data>
+  <data name="EntireProduction" xml:space="preserve">
+    <value>Hele produktionen</value>
+  </data>
+  <data name="ExceptionCaught" xml:space="preserve">
+    <value>Fejlhåndtering</value>
+  </data>
+  <data name="ExpectedItems" xml:space="preserve">
+    <value>Planlagt Antal</value>
+  </data>
+  <data name="Instances" xml:space="preserve">
+    <value>Antal</value>
+  </data>
+  <data name="InvalidCounter" xml:space="preserve">
+    <value>Angiv venligst en tællerværdi, der er højere end den forrige</value>
+  </data>
+  <data name="InvalidExpectedItems" xml:space="preserve">
+    <value>Angiv venligst en værdi større end nul</value>
+  </data>
+  <data name="InvalidOrder" xml:space="preserve">
+    <value>Indtast venligst et 4-cifret ordrenummer</value>
+  </data>
+  <data name="InvalidProducedItemsPerHour" xml:space="preserve">
+    <value>Angiv venligst en værdi større end 0 og mindre end skud per time</value>
+  </data>
+  <data name="InvalidProduct" xml:space="preserve">
+    <value>Indtast venligst et 4-cifret eller 7-cifret produktnummer</value>
+  </data>
+  <data name="InvalidStartTime" xml:space="preserve">
+    <value>Det sidste hold sluttede {0}, dette hold starter før, nemlig {1}</value>
+  </data>
+  <data name="InvalidTime" xml:space="preserve">
+    <value>Angiv venligst et gyldigt tidspunkt</value>
+  </data>
+  <data name="InvalidUpdateTime" xml:space="preserve">
+    <value>Angiv venligst et tidspunkt, der er efter det forrige</value>
+  </data>
+  <data name="InvalidValidatedSetupTime" xml:space="preserve">
+    <value>Angiv venligst en værdi på mere end 0 minutter</value>
+  </data>
+  <data name="Machine" xml:space="preserve">
+    <value>Maskine</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>Minutter</value>
+  </data>
+  <data name="NewProduction" xml:space="preserve">
+    <value>Ny produktion</value>
+  </data>
+  <data name="NewProductionShift" xml:space="preserve">
+    <value>Nyt skift</value>
+  </data>
+  <data name="NewProductionStop" xml:space="preserve">
+    <value>Nyt produktionsstop</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Ordrenummer</value>
+  </data>
+  <data name="OverallOEE" xml:space="preserve">
+    <value>OEE</value>
+  </data>
+  <data name="Performance" xml:space="preserve">
+    <value>Ydelse</value>
+  </data>
+  <data name="ProducedItems" xml:space="preserve">
+    <value>Produceret antal</value>
+  </data>
+  <data name="ProducedItemsPerHour" xml:space="preserve">
+    <value>Valideret antal</value>
+  </data>
+  <data name="Product" xml:space="preserve">
+    <value>Produktnummer</value>
+  </data>
+  <data name="ProductionCounter" xml:space="preserve">
+    <value>Antal støbte emner</value>
+  </data>
+  <data name="ProductionShiftStartCounter" xml:space="preserve">
+    <value>Tæller start</value>
+  </data>
+  <data name="ProductionShiftStartDate" xml:space="preserve">
+    <value>Skiftets startdato</value>
+  </data>
+  <data name="ProductionShiftStartTime" xml:space="preserve">
+    <value>Skiftets starttid</value>
+  </data>
+  <data name="ProductionShiftStatistics" xml:space="preserve">
+    <value>Skiftets forløb</value>
+  </data>
+  <data name="ProductionShiftTeam" xml:space="preserve">
+    <value>Skift</value>
+  </data>
+  <data name="ProductionShiftWarning" xml:space="preserve">
+    <value>Advarsel omkring skift</value>
+  </data>
+  <data name="ProductionLengthIsLong" xml:space="preserve">
+    <value>Skiftet ser ud til at være mindst {0} timer. Er du sikker på det indtastede?</value>
+  </data>
+  <data name="ProductionStart" xml:space="preserve">
+    <value>Starttid</value>
+  </data>
+  <data name="ProductionStopDuration" xml:space="preserve">
+    <value>Stoppets varighed (i minutter)</value>
+  </data>
+  <data name="ProductionStopType" xml:space="preserve">
+    <value>Stoptypen</value>
+  </data>
+  <data name="ProductionTime" xml:space="preserve">
+    <value>Produktionstid</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>Kvalitet</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="UnknownMachine" xml:space="preserve">
+    <value>Ukendt maskine</value>
+  </data>
+  <data name="UpdateDate" xml:space="preserve">
+    <value>Opdateringsdato</value>
+  </data>
+  <data name="UpdateTime" xml:space="preserve">
+    <value>Opdateringstidspunkt</value>
+  </data>
+  <data name="UseExistingOrder" xml:space="preserve">
+    <value>Igangværende ordre</value>
+  </data>
+  <data name="Validated" xml:space="preserve">
+    <value>Valideret</value>
+  </data>
+  <data name="ValidatedSetupTime" xml:space="preserve">
+    <value>Valideret opsætningstid</value>
+  </data>
+</root>
