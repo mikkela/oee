@@ -1,10 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE", "Mikadocs.OEE\Mikadocs.OEE.csproj", "{5A737B92-FAC2-455D-99B9-E45D2FB821FE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE.Test", "Test\Unit\Mikadocs.OEE.Test\Mikadocs.OEE.Test.csproj", "{94A32B2D-3496-4991-ACDA-1319B4ED1E5F}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EE293EAD-1865-4D75-BCE3-CE0AF7E45AA1}"
 	ProjectSection(SolutionItems) = preProject
 		Lib\Castle.Core.dll = Lib\Castle.Core.dll
@@ -19,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Lib\NHibernate.license.txt = Lib\NHibernate.license.txt
 		setup.sql = setup.sql
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE", "Mikadocs.OEE\Mikadocs.OEE.csproj", "{5A737B92-FAC2-455D-99B9-E45D2FB821FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE.Test", "Test\Unit\Mikadocs.OEE.Test\Mikadocs.OEE.Test.csproj", "{94A32B2D-3496-4991-ACDA-1319B4ED1E5F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE.Repository", "Mikadocs.OEE.Repository\Mikadocs.OEE.Repository.csproj", "{55D362C3-9048-4997-9ABD-58E84B6F4F3A}"
 EndProject
@@ -81,7 +81,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_UpdateFileVersion = False
 		BuildVersion_UpdateAssemblyVersion = False
+		BuildVersion_UpdateFileVersion = False
 	EndGlobalSection
 EndGlobal
