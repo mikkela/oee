@@ -21,6 +21,14 @@ namespace Mikadocs.OEE.ManagementConsole
             SetTexts();
             productionStopRegistrationGridView.AutoGenerateColumns = false;
             repository = new NewRepository();
+
+            cbMachine.DataSource = Settings.Default.Machines;
+            cbMachine.SelectedItem = null;
+
+            cbTeam.DataSource = GetTeams();
+            cbTeam.DisplayMember = "Name";
+            cbTeam.SelectedItem = null;
+
             Load();
         }
 
@@ -35,6 +43,7 @@ namespace Mikadocs.OEE.ManagementConsole
         public void Load()
         {
             productionDataGrid.DataSource = LoadProductions();
+            productionDataGrid.Refresh();
             productionStopViewEntityBindingSource.DataSource = LoadProductionStops();
             ProductionStopRegistrationViewEntity.Stops = repository.LoadAll<ProductionStop>();
         }
@@ -57,7 +66,7 @@ namespace Mikadocs.OEE.ManagementConsole
         public void Delete()
         {
             bool save = true;
-            var shifts = new List<ProductionShiftViewEntity>(SelectedProductionViewEntity.Shifts);
+            var shifts = SelectedProductionViewEntity != null ? new List<ProductionShiftViewEntity>(SelectedProductionViewEntity.Shifts) : new List<ProductionShiftViewEntity>();
 
             if (productionShiftDataGrid.SelectedRows.Count > 0)
             {
@@ -226,14 +235,16 @@ namespace Mikadocs.OEE.ManagementConsole
 
         private ProductionViewEntityBindingList LoadProductions()
         {
-            productions = repository.LoadAll<Production>();
-                
-            return new ProductionViewEntityBindingList(productions.Select(p => new ProductionViewEntity(p)));            
+            productions = repository.LoadProductions(Query);
+
+            return new ProductionViewEntityBindingList(productions.Select(p => new ProductionViewEntity(p)));
         }
 
         private ProductionStopViewEntityBindingList LoadProductionStops()
         {
-            return new ProductionStopViewEntityBindingList(repository.LoadAll<ProductionStop>().Select(p => new ProductionStopViewEntity(p)));
+            return new ProductionStopViewEntityBindingList(
+               
+                repository.LoadAll<ProductionStop>().Select(p => new ProductionStopViewEntity(p)));
         }
 
         private void SaveProductions()
@@ -249,6 +260,43 @@ namespace Mikadocs.OEE.ManagementConsole
             repository.BeginTransaction();
             repository.Delete(p);
             repository.Commit();
-        }        
+        }          
+  
+        private ProductionQuery Query
+        {
+            get
+            {
+                var result = new ProductionQuery().AddDateRange(dtPeriodStart.Value, dtPeriodEnd.Value);
+
+                if (!string.IsNullOrEmpty(txtProduct.Text))
+                    result = result.AddProduct(new ProductNumber(txtProduct.Text));
+
+                if (!string.IsNullOrEmpty(txtOrder.Text))
+                    result = result.AddOrder(new OrderNumber(txtOrder.Text));
+
+                if (cbMachine.SelectedItem != null)
+                    result = result.AddMachine(cbMachine.SelectedItem.ToString());
+                if (cbTeam.SelectedItem != null)
+                    result = result.AddTeam((ProductionTeam)cbTeam.SelectedItem);
+
+                return result;
+            }
+        }
+
+        private void OnValueChanged(object sender, EventArgs e)
+        {
+            Load();
+        }
+
+        private IEnumerable<ProductionTeam> GetTeams()
+        {
+            using (RepositoryFactory factory = new RepositoryFactory())
+            {
+                using (IEntityRepository<ProductionTeam> repository = factory.CreateEntityRepository<ProductionTeam>())
+                {
+                    return repository.LoadAll();
+                }
+            }
+        }
     }
 }

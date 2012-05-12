@@ -34,7 +34,6 @@
             this.btnPrint = new System.Windows.Forms.Button();
             this.pnlBorder = new System.Windows.Forms.Panel();
             this.pnlDisplay = new System.Windows.Forms.Panel();
-            this.ucReport = new Mikadocs.OEE.ManagementConsole.ReportControl();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.pnlTopLeft = new System.Windows.Forms.Panel();
             this.pnlHeader = new System.Windows.Forms.Panel();
@@ -58,6 +57,7 @@
             this.lblTeam = new System.Windows.Forms.Label();
             this.cbTeam = new System.Windows.Forms.ComboBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.ucReport = new Mikadocs.OEE.ManagementConsole.ReportControl();
             this.pnlBorder.SuspendLayout();
             this.pnlDisplay.SuspendLayout();
             this.pnlTop.SuspendLayout();
@@ -128,15 +128,6 @@
             this.pnlDisplay.Name = "pnlDisplay";
             this.pnlDisplay.Size = new System.Drawing.Size(938, 335);
             this.pnlDisplay.TabIndex = 19;
-            // 
-            // ucReport
-            // 
-            this.ucReport.BackColor = System.Drawing.SystemColors.Window;
-            this.ucReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucReport.Location = new System.Drawing.Point(0, 0);
-            this.ucReport.Name = "ucReport";
-            this.ucReport.Size = new System.Drawing.Size(938, 335);
-            this.ucReport.TabIndex = 0;
             // 
             // pnlTop
             // 
@@ -417,6 +408,15 @@
             this.cbTeam.Name = "cbTeam";
             this.cbTeam.Size = new System.Drawing.Size(97, 28);
             this.cbTeam.TabIndex = 11;
+            // 
+            // ucReport
+            // 
+            this.ucReport.BackColor = System.Drawing.SystemColors.Window;
+            this.ucReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucReport.Location = new System.Drawing.Point(0, 0);
+            this.ucReport.Name = "ucReport";
+            this.ucReport.Size = new System.Drawing.Size(938, 335);
+            this.ucReport.TabIndex = 0;
             // 
             // GenerateReportForm
             // 

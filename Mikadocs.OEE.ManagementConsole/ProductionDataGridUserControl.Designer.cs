@@ -46,6 +46,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.productionShiftDataGrid = new System.Windows.Forms.DataGridView();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.filterPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.lblPeriodStart = new System.Windows.Forms.Label();
+            this.lblPeriodEnd = new System.Windows.Forms.Label();
+            this.lblOrder = new System.Windows.Forms.Label();
+            this.lblProduct = new System.Windows.Forms.Label();
+            this.lblMachine = new System.Windows.Forms.Label();
+            this.lblTeam = new System.Windows.Forms.Label();
+            this.dtPeriodStart = new System.Windows.Forms.DateTimePicker();
+            this.dtPeriodEnd = new System.Windows.Forms.DateTimePicker();
+            this.txtOrder = new System.Windows.Forms.TextBox();
+            this.txtProduct = new System.Windows.Forms.TextBox();
+            this.cbMachine = new System.Windows.Forms.ComboBox();
+            this.cbTeam = new System.Windows.Forms.ComboBox();
             this.machineDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,6 +83,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.productionLegDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionStopRegistrationGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionShiftDataGrid)).BeginInit();
+            this.filterPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productionViewEntityBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionLegViewEntityBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionStopViewEntityBindingSource)).BeginInit();
@@ -81,18 +95,20 @@
             // 
             this.centerPanel.ColumnCount = 1;
             this.centerPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.centerPanel.Controls.Add(this.productionDataGrid, 0, 1);
-            this.centerPanel.Controls.Add(this.productionLegDataGrid, 0, 5);
-            this.centerPanel.Controls.Add(this.productionLabel, 0, 0);
-            this.centerPanel.Controls.Add(this.productionLegLabel, 0, 4);
-            this.centerPanel.Controls.Add(this.productionStopRegistrationLabel, 0, 6);
-            this.centerPanel.Controls.Add(this.productionStopRegistrationGridView, 0, 7);
-            this.centerPanel.Controls.Add(this.label1, 0, 2);
-            this.centerPanel.Controls.Add(this.productionShiftDataGrid, 0, 3);
+            this.centerPanel.Controls.Add(this.productionDataGrid, 0, 2);
+            this.centerPanel.Controls.Add(this.productionLegDataGrid, 0, 6);
+            this.centerPanel.Controls.Add(this.productionLabel, 0, 1);
+            this.centerPanel.Controls.Add(this.productionLegLabel, 0, 5);
+            this.centerPanel.Controls.Add(this.productionStopRegistrationLabel, 0, 7);
+            this.centerPanel.Controls.Add(this.productionStopRegistrationGridView, 0, 8);
+            this.centerPanel.Controls.Add(this.label1, 0, 3);
+            this.centerPanel.Controls.Add(this.productionShiftDataGrid, 0, 4);
+            this.centerPanel.Controls.Add(this.filterPanel, 0, 0);
             this.centerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.centerPanel.Location = new System.Drawing.Point(0, 0);
             this.centerPanel.Name = "centerPanel";
-            this.centerPanel.RowCount = 8;
+            this.centerPanel.RowCount = 9;
+            this.centerPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
             this.centerPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.centerPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.centerPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -128,10 +144,10 @@
             this.productionStartDataGridViewTextBoxColumn});
             this.productionDataGrid.DataSource = this.productionViewEntityBindingSource;
             this.productionDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.productionDataGrid.Location = new System.Drawing.Point(3, 26);
+            this.productionDataGrid.Location = new System.Drawing.Point(3, 101);
             this.productionDataGrid.MultiSelect = false;
             this.productionDataGrid.Name = "productionDataGrid";
-            this.productionDataGrid.Size = new System.Drawing.Size(671, 108);
+            this.productionDataGrid.Size = new System.Drawing.Size(671, 90);
             this.productionDataGrid.TabIndex = 0;
             this.productionDataGrid.SelectionChanged += new System.EventHandler(this.OnProductionSelectionChanged);
             // 
@@ -163,9 +179,9 @@
             this.discardedItemsDataGridViewTextBoxColumn});
             this.productionLegDataGrid.DataSource = this.productionLegViewEntityBindingSource;
             this.productionLegDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.productionLegDataGrid.Location = new System.Drawing.Point(3, 294);
+            this.productionLegDataGrid.Location = new System.Drawing.Point(3, 333);
             this.productionLegDataGrid.Name = "productionLegDataGrid";
-            this.productionLegDataGrid.Size = new System.Drawing.Size(671, 108);
+            this.productionLegDataGrid.Size = new System.Drawing.Size(671, 90);
             this.productionLegDataGrid.TabIndex = 1;
             this.productionLegDataGrid.SelectionChanged += new System.EventHandler(this.OnProductionLegSelectionChanged);
             // 
@@ -174,7 +190,7 @@
             this.productionLabel.BackColor = System.Drawing.Color.White;
             this.productionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.productionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.productionLabel.Location = new System.Drawing.Point(3, 0);
+            this.productionLabel.Location = new System.Drawing.Point(3, 75);
             this.productionLabel.Name = "productionLabel";
             this.productionLabel.Size = new System.Drawing.Size(671, 23);
             this.productionLabel.TabIndex = 2;
@@ -186,7 +202,7 @@
             this.productionLegLabel.BackColor = System.Drawing.Color.White;
             this.productionLegLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.productionLegLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.productionLegLabel.Location = new System.Drawing.Point(3, 271);
+            this.productionLegLabel.Location = new System.Drawing.Point(3, 310);
             this.productionLegLabel.Name = "productionLegLabel";
             this.productionLegLabel.Size = new System.Drawing.Size(671, 20);
             this.productionLegLabel.TabIndex = 3;
@@ -198,7 +214,7 @@
             this.productionStopRegistrationLabel.BackColor = System.Drawing.Color.White;
             this.productionStopRegistrationLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.productionStopRegistrationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.productionStopRegistrationLabel.Location = new System.Drawing.Point(3, 405);
+            this.productionStopRegistrationLabel.Location = new System.Drawing.Point(3, 426);
             this.productionStopRegistrationLabel.Name = "productionStopRegistrationLabel";
             this.productionStopRegistrationLabel.Size = new System.Drawing.Size(671, 20);
             this.productionStopRegistrationLabel.TabIndex = 4;
@@ -223,9 +239,9 @@
             this.durationDataGridViewTextBoxColumn});
             this.productionStopRegistrationGridView.DataSource = this.productionStopRegistrationViewEntityBindingSource;
             this.productionStopRegistrationGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.productionStopRegistrationGridView.Location = new System.Drawing.Point(3, 428);
+            this.productionStopRegistrationGridView.Location = new System.Drawing.Point(3, 449);
             this.productionStopRegistrationGridView.Name = "productionStopRegistrationGridView";
-            this.productionStopRegistrationGridView.Size = new System.Drawing.Size(671, 111);
+            this.productionStopRegistrationGridView.Size = new System.Drawing.Size(671, 90);
             this.productionStopRegistrationGridView.TabIndex = 5;
             // 
             // label1
@@ -234,7 +250,7 @@
             this.label1.BackColor = System.Drawing.Color.White;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(3, 137);
+            this.label1.Location = new System.Drawing.Point(3, 194);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(671, 20);
             this.label1.TabIndex = 6;
@@ -258,9 +274,9 @@
             this.dataGridViewTextBoxColumn1});
             this.productionShiftDataGrid.DataSource = this.productionShiftViewEntityBindingSource;
             this.productionShiftDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.productionShiftDataGrid.Location = new System.Drawing.Point(3, 160);
+            this.productionShiftDataGrid.Location = new System.Drawing.Point(3, 217);
             this.productionShiftDataGrid.Name = "productionShiftDataGrid";
-            this.productionShiftDataGrid.Size = new System.Drawing.Size(671, 108);
+            this.productionShiftDataGrid.Size = new System.Drawing.Size(671, 90);
             this.productionShiftDataGrid.TabIndex = 7;
             this.productionShiftDataGrid.SelectionChanged += new System.EventHandler(this.OnProductionShiftSelectionChanged);
             // 
@@ -270,6 +286,168 @@
             this.Date.HeaderText = "Dato";
             this.Date.Name = "Date";
             this.Date.ReadOnly = true;
+            // 
+            // filterPanel
+            // 
+            this.filterPanel.ColumnCount = 6;
+            this.filterPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.filterPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.filterPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.filterPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.filterPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.filterPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.filterPanel.Controls.Add(this.lblPeriodStart, 0, 0);
+            this.filterPanel.Controls.Add(this.lblPeriodEnd, 0, 1);
+            this.filterPanel.Controls.Add(this.lblOrder, 2, 0);
+            this.filterPanel.Controls.Add(this.lblProduct, 2, 1);
+            this.filterPanel.Controls.Add(this.lblMachine, 4, 0);
+            this.filterPanel.Controls.Add(this.lblTeam, 4, 1);
+            this.filterPanel.Controls.Add(this.dtPeriodStart, 1, 0);
+            this.filterPanel.Controls.Add(this.dtPeriodEnd, 1, 1);
+            this.filterPanel.Controls.Add(this.txtOrder, 3, 0);
+            this.filterPanel.Controls.Add(this.txtProduct, 3, 1);
+            this.filterPanel.Controls.Add(this.cbMachine, 5, 0);
+            this.filterPanel.Controls.Add(this.cbTeam, 5, 1);
+            this.filterPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.filterPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.filterPanel.Location = new System.Drawing.Point(3, 3);
+            this.filterPanel.Name = "filterPanel";
+            this.filterPanel.RowCount = 2;
+            this.filterPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.filterPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.filterPanel.Size = new System.Drawing.Size(671, 69);
+            this.filterPanel.TabIndex = 8;
+            // 
+            // lblPeriodStart
+            // 
+            this.lblPeriodStart.AutoSize = true;
+            this.lblPeriodStart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPeriodStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.lblPeriodStart.ForeColor = System.Drawing.Color.White;
+            this.lblPeriodStart.Location = new System.Drawing.Point(3, 0);
+            this.lblPeriodStart.Name = "lblPeriodStart";
+            this.lblPeriodStart.Size = new System.Drawing.Size(105, 34);
+            this.lblPeriodStart.TabIndex = 0;
+            this.lblPeriodStart.Text = "PeriodStart";
+            this.lblPeriodStart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblPeriodEnd
+            // 
+            this.lblPeriodEnd.AutoSize = true;
+            this.lblPeriodEnd.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPeriodEnd.ForeColor = System.Drawing.Color.White;
+            this.lblPeriodEnd.Location = new System.Drawing.Point(3, 34);
+            this.lblPeriodEnd.Name = "lblPeriodEnd";
+            this.lblPeriodEnd.Size = new System.Drawing.Size(105, 35);
+            this.lblPeriodEnd.TabIndex = 1;
+            this.lblPeriodEnd.Text = "PeriodEnd";
+            this.lblPeriodEnd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblOrder
+            // 
+            this.lblOrder.AutoSize = true;
+            this.lblOrder.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblOrder.ForeColor = System.Drawing.Color.White;
+            this.lblOrder.Location = new System.Drawing.Point(225, 0);
+            this.lblOrder.Name = "lblOrder";
+            this.lblOrder.Size = new System.Drawing.Size(105, 34);
+            this.lblOrder.TabIndex = 2;
+            this.lblOrder.Text = "Order";
+            this.lblOrder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblProduct
+            // 
+            this.lblProduct.AutoSize = true;
+            this.lblProduct.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblProduct.ForeColor = System.Drawing.Color.White;
+            this.lblProduct.Location = new System.Drawing.Point(225, 34);
+            this.lblProduct.Name = "lblProduct";
+            this.lblProduct.Size = new System.Drawing.Size(105, 35);
+            this.lblProduct.TabIndex = 3;
+            this.lblProduct.Text = "Product";
+            this.lblProduct.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblMachine
+            // 
+            this.lblMachine.AutoSize = true;
+            this.lblMachine.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMachine.ForeColor = System.Drawing.Color.White;
+            this.lblMachine.Location = new System.Drawing.Point(447, 0);
+            this.lblMachine.Name = "lblMachine";
+            this.lblMachine.Size = new System.Drawing.Size(105, 34);
+            this.lblMachine.TabIndex = 4;
+            this.lblMachine.Text = "Machine";
+            this.lblMachine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblTeam
+            // 
+            this.lblTeam.AutoSize = true;
+            this.lblTeam.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTeam.ForeColor = System.Drawing.Color.White;
+            this.lblTeam.Location = new System.Drawing.Point(447, 34);
+            this.lblTeam.Name = "lblTeam";
+            this.lblTeam.Size = new System.Drawing.Size(105, 35);
+            this.lblTeam.TabIndex = 5;
+            this.lblTeam.Text = "Team";
+            this.lblTeam.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // dtPeriodStart
+            // 
+            this.dtPeriodStart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtPeriodStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtPeriodStart.Location = new System.Drawing.Point(114, 3);
+            this.dtPeriodStart.Name = "dtPeriodStart";
+            this.dtPeriodStart.Size = new System.Drawing.Size(105, 26);
+            this.dtPeriodStart.TabIndex = 6;
+            this.dtPeriodStart.ValueChanged += new System.EventHandler(this.OnValueChanged);
+            // 
+            // dtPeriodEnd
+            // 
+            this.dtPeriodEnd.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtPeriodEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtPeriodEnd.Location = new System.Drawing.Point(114, 37);
+            this.dtPeriodEnd.Name = "dtPeriodEnd";
+            this.dtPeriodEnd.Size = new System.Drawing.Size(105, 26);
+            this.dtPeriodEnd.TabIndex = 7;
+            this.dtPeriodEnd.ValueChanged += new System.EventHandler(this.OnValueChanged);
+            // 
+            // txtOrder
+            // 
+            this.txtOrder.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtOrder.Location = new System.Drawing.Point(336, 3);
+            this.txtOrder.Name = "txtOrder";
+            this.txtOrder.Size = new System.Drawing.Size(105, 26);
+            this.txtOrder.TabIndex = 8;
+            this.txtOrder.TextChanged += new System.EventHandler(this.OnValueChanged);
+            // 
+            // txtProduct
+            // 
+            this.txtProduct.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtProduct.Location = new System.Drawing.Point(336, 37);
+            this.txtProduct.Name = "txtProduct";
+            this.txtProduct.Size = new System.Drawing.Size(105, 26);
+            this.txtProduct.TabIndex = 9;
+            this.txtProduct.TextChanged += new System.EventHandler(this.OnValueChanged);
+            // 
+            // cbMachine
+            // 
+            this.cbMachine.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbMachine.FormattingEnabled = true;
+            this.cbMachine.Location = new System.Drawing.Point(558, 3);
+            this.cbMachine.Name = "cbMachine";
+            this.cbMachine.Size = new System.Drawing.Size(110, 28);
+            this.cbMachine.TabIndex = 10;
+            this.cbMachine.SelectedValueChanged += new System.EventHandler(this.OnValueChanged);
+            // 
+            // cbTeam
+            // 
+            this.cbTeam.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbTeam.FormattingEnabled = true;
+            this.cbTeam.Location = new System.Drawing.Point(558, 37);
+            this.cbTeam.Name = "cbTeam";
+            this.cbTeam.Size = new System.Drawing.Size(110, 28);
+            this.cbTeam.TabIndex = 11;
+            this.cbTeam.SelectedValueChanged += new System.EventHandler(this.OnValueChanged);
             // 
             // machineDataGridViewTextBoxColumn
             // 
@@ -398,6 +576,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.productionLegDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionStopRegistrationGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionShiftDataGrid)).EndInit();
+            this.filterPanel.ResumeLayout(false);
+            this.filterPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productionViewEntityBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionLegViewEntityBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionStopViewEntityBindingSource)).EndInit();
@@ -440,5 +620,18 @@
         private System.Windows.Forms.BindingSource productionStopViewEntityBindingSource;
         private System.Windows.Forms.DataGridViewComboBoxColumn productionStopDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn durationDataGridViewTextBoxColumn;
+        private System.Windows.Forms.TableLayoutPanel filterPanel;
+        private System.Windows.Forms.Label lblPeriodStart;
+        private System.Windows.Forms.Label lblPeriodEnd;
+        private System.Windows.Forms.Label lblOrder;
+        private System.Windows.Forms.Label lblProduct;
+        private System.Windows.Forms.Label lblMachine;
+        private System.Windows.Forms.Label lblTeam;
+        private System.Windows.Forms.DateTimePicker dtPeriodStart;
+        private System.Windows.Forms.DateTimePicker dtPeriodEnd;
+        private System.Windows.Forms.TextBox txtOrder;
+        private System.Windows.Forms.TextBox txtProduct;
+        private System.Windows.Forms.ComboBox cbMachine;
+        private System.Windows.Forms.ComboBox cbTeam;
     }
 }
