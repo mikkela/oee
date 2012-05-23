@@ -9,7 +9,7 @@ namespace Mikadocs.OEE
         private Production production;
         private ProductionTeam team;
         private DateTime date;
-        private IList<ProductionLeg> productionLegList = new List<ProductionLeg>();
+        private IList<ProductionLeg> ProductionLegList { get; set; }
 
         internal ProductionShift() { }
 
@@ -21,7 +21,7 @@ namespace Mikadocs.OEE
             if (team == null)
                 throw new ArgumentNullException("team");
 
-            this.productionLegList = new List<ProductionLeg>();
+            this.ProductionLegList = new List<ProductionLeg>();
             this.production = production;
             this.team = team;
             this.date = date.Date;          
@@ -49,21 +49,21 @@ namespace Mikadocs.OEE
         {
             get
             {
-                return productionLegList;
+                return ProductionLegList;
             }
             set
             {
-                productionLegList = new List<ProductionLeg>(value);
+                ProductionLegList = new List<ProductionLeg>(value);
             }
         }
 
         public virtual ProductionLeg AddProductionLeg(DateTime productionStart, long counterStart)
         {
-            if (productionLegList.Count > 0 && productionStart < ProductionEnd)
+            if (ProductionLegList.Count > 0 && productionStart < ProductionEnd)
                 throw new ArgumentException("The leg can not start in the middle of an existing leg", "productionStart");
 
             ProductionLeg leg = new ProductionLeg(this, productionStart, counterStart);
-            productionLegList.Add(leg);
+            ProductionLegList.Add(leg);
 
             return leg;
         }
@@ -72,9 +72,9 @@ namespace Mikadocs.OEE
         {
             get
             {
-                if (productionLegList.Count == 0)
+                if (ProductionLegList.Count == 0)
                     return null;
-                return productionLegList[productionLegList.Count - 1];
+                return ProductionLegList[ProductionLegList.Count - 1];
             }
         }
 
@@ -100,7 +100,7 @@ namespace Mikadocs.OEE
             get
             {
                 DateTime result = DateTime.MaxValue;
-                foreach (var leg in productionLegList)
+                foreach (var leg in ProductionLegList)
                 {
                     if (leg.ProductionStart < result)
                         result = leg.ProductionStart;
@@ -114,7 +114,7 @@ namespace Mikadocs.OEE
             get
             {
                 TimeSpan result = TimeSpan.Zero;
-                foreach (var leg in productionLegList)
+                foreach (var leg in ProductionLegList)
                 {
                     result = result + leg.Duration;
                 }
@@ -127,7 +127,7 @@ namespace Mikadocs.OEE
             get
             {
                 List<ProductionStopRegistration> result = new List<ProductionStopRegistration>();
-                foreach (var leg in productionLegList)
+                foreach (var leg in ProductionLegList)
                 {
                     result.AddRange(leg.ProductionStopRegistrations);
                 }
@@ -139,12 +139,12 @@ namespace Mikadocs.OEE
 
         public virtual long ProducedItems
         {
-            get { return SumItems(productionLegList, leg => leg.ProducedItems); }
+            get { return SumItems(ProductionLegList, leg => leg.ProducedItems); }
         }
 
         public virtual long DiscardedItems
         {
-            get { return SumItems(productionLegList, leg => leg.DiscardedItems); }
+            get { return SumItems(ProductionLegList, leg => leg.DiscardedItems); }
         }
 
         #endregion
@@ -154,7 +154,7 @@ namespace Mikadocs.OEE
             get
             {
                 DateTime result = DateTime.MinValue;
-                foreach (var leg in productionLegList)
+                foreach (var leg in ProductionLegList)
                 {
                     if (leg.ProductionEnd > result)
                         result = leg.ProductionEnd;
@@ -165,7 +165,7 @@ namespace Mikadocs.OEE
 
         public virtual void RemoveProductionLeg(ProductionLeg leg)
         {
-            productionLegList.Remove(leg);
+            ProductionLegList.Remove(leg);
         }
 
         private delegate long SumDelegate(ProductionLeg leg);

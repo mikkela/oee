@@ -12,7 +12,7 @@ namespace Mikadocs.OEE
         private long expectedItems;
         private long producedItemsPerHour;
         private TimeSpan validatedStartTime;
-        private IList<ProductionShift> shiftList = new List<ProductionShift>();
+        private IList<ProductionShift> ShiftList { get; set; }
 
         internal Production() { }
 
@@ -46,7 +46,7 @@ namespace Mikadocs.OEE
             this.expectedItems = expectedItems;
             this.producedItemsPerHour = producedItemsPerHour;
             this.validatedStartTime = validatedStartTime;
-            this.shiftList = new List<ProductionShift>();
+            ShiftList = new List<ProductionShift>();
         }
 
         public virtual string Machine
@@ -97,12 +97,12 @@ namespace Mikadocs.OEE
 
         public virtual IEnumerable<ProductionShift> Shifts
         {
-            get { return shiftList; }
+            get { return ShiftList; }
         }
 
         public virtual ProductionShift AddProductionShift(ProductionTeam team, DateTime date)
         {
-            foreach (ProductionShift shift in shiftList)
+            foreach (ProductionShift shift in ShiftList)
             {
                 if (shift.Date.Equals(date.Date) &&
                     shift.Team.Equals(team))
@@ -110,14 +110,14 @@ namespace Mikadocs.OEE
             }
 
             ProductionShift result = new ProductionShift(this, team, date);
-            shiftList.Add(result);
+            ShiftList.Add(result);
 
             return result;
         }
 
         public virtual void RemoveProductionShift(ProductionShift shift)
         {
-            shiftList.Remove(shift);
+            ShiftList.Remove(shift);
         }
 
         #region IProduction Members
@@ -126,7 +126,7 @@ namespace Mikadocs.OEE
         {
             get
             {
-                if (shiftList.Count == 0)
+                if (ShiftList.Count == 0)
                     return DateTime.MinValue;
 
                 DateTime result = DateTime.MaxValue;
@@ -220,5 +220,6 @@ namespace Mikadocs.OEE
         }
 
         #endregion
+        
     }
 }

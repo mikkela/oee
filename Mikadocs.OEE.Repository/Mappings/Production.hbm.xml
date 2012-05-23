@@ -21,7 +21,7 @@
 
     <property name="ValidatedStartTime" />
     
-    <bag name="ShiftList" access="field.camelcase" lazy="false">
+    <bag name="ShiftList" lazy="false">
       <key column="ProductionId" />
       <one-to-many class="Mikadocs.OEE.ProductionShift, Mikadocs.OEE" />
     </bag>

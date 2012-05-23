@@ -64,12 +64,12 @@ namespace Mikadocs.OEE
                 GetType().FullName, id, version, string.IsNullOrEmpty(values) ? "none" : values);
         }
 
-        internal virtual string InternalToString()
+        protected internal virtual string InternalToString()
         {
             return base.ToString();
         }
 
-        internal virtual int InternalGetHashCode()
+        protected internal virtual int InternalGetHashCode()
         {
             return base.GetHashCode();
         }

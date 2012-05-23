@@ -7,14 +7,14 @@ namespace Mikadocs.OEE
     public class MachineConfiguration : EntityObject
     {
         private string machineName;
-        private IList<ProductionStop> availableProductionStopsList;
+        private IList<ProductionStop> AvailableProductionStopsList { get; set; }
 
         internal MachineConfiguration() { }
 
         public MachineConfiguration(string machineName, IEnumerable<ProductionStop> availableProductionStops)
         {
             this.machineName = machineName;
-            this.availableProductionStopsList = new List<ProductionStop>(availableProductionStops);
+            this.AvailableProductionStopsList = new List<ProductionStop>(availableProductionStops);
         }
 
         public virtual string MachineName
@@ -30,8 +30,8 @@ namespace Mikadocs.OEE
 
         public virtual IEnumerable<ProductionStop> AvailableProductionStops
         {
-            get { return availableProductionStopsList; }
-            set { availableProductionStopsList = new List<ProductionStop>(value); }
+            get { return AvailableProductionStopsList; }
+            set { AvailableProductionStopsList = new List<ProductionStop>(value); }
         }
     }
 }

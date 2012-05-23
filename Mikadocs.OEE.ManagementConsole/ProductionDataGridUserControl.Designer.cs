@@ -37,15 +37,34 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.centerPanel = new System.Windows.Forms.TableLayoutPanel();
             this.productionDataGrid = new System.Windows.Forms.DataGridView();
+            this.machineDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.expectedItemsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.producedItemsPerHourDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ValidatedItemsPerHour = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productionStartDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productionViewEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.productionLegDataGrid = new System.Windows.Forms.DataGridView();
+            this.productionStartDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productionEndDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.counterStartDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.counterEndDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discardedItemsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productionLegViewEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.productionLabel = new System.Windows.Forms.Label();
             this.productionLegLabel = new System.Windows.Forms.Label();
             this.productionStopRegistrationLabel = new System.Windows.Forms.Label();
             this.productionStopRegistrationGridView = new System.Windows.Forms.DataGridView();
+            this.productionStopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.productionStopViewEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.durationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productionStopRegistrationViewEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.productionShiftDataGrid = new System.Windows.Forms.DataGridView();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productionShiftViewEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.filterPanel = new System.Windows.Forms.TableLayoutPanel();
             this.lblPeriodStart = new System.Windows.Forms.Label();
             this.lblPeriodEnd = new System.Windows.Forms.Label();
@@ -59,36 +78,17 @@
             this.txtProduct = new System.Windows.Forms.TextBox();
             this.cbMachine = new System.Windows.Forms.ComboBox();
             this.cbTeam = new System.Windows.Forms.ComboBox();
-            this.machineDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.expectedItemsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.producedItemsPerHourDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productionStartDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productionViewEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.productionStartDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productionEndDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.counterStartDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.counterEndDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.discardedItemsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productionLegViewEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.productionStopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.productionStopViewEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.durationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productionStopRegistrationViewEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productionShiftViewEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.centerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productionDataGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productionLegDataGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productionStopRegistrationGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productionShiftDataGrid)).BeginInit();
-            this.filterPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productionViewEntityBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productionLegDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionLegViewEntityBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productionStopRegistrationGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionStopViewEntityBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionStopRegistrationViewEntityBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productionShiftDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionShiftViewEntityBindingSource)).BeginInit();
+            this.filterPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // centerPanel
@@ -151,11 +151,53 @@
             this.productionDataGrid.TabIndex = 0;
             this.productionDataGrid.SelectionChanged += new System.EventHandler(this.OnProductionSelectionChanged);
             // 
+            // machineDataGridViewTextBoxColumn
+            // 
+            this.machineDataGridViewTextBoxColumn.DataPropertyName = "Machine";
+            this.machineDataGridViewTextBoxColumn.HeaderText = "Maskine";
+            this.machineDataGridViewTextBoxColumn.Name = "machineDataGridViewTextBoxColumn";
+            // 
+            // productDataGridViewTextBoxColumn
+            // 
+            this.productDataGridViewTextBoxColumn.DataPropertyName = "Product";
+            this.productDataGridViewTextBoxColumn.HeaderText = "Produkt";
+            this.productDataGridViewTextBoxColumn.Name = "productDataGridViewTextBoxColumn";
+            // 
+            // orderDataGridViewTextBoxColumn
+            // 
+            this.orderDataGridViewTextBoxColumn.DataPropertyName = "Order";
+            this.orderDataGridViewTextBoxColumn.HeaderText = "Ordre";
+            this.orderDataGridViewTextBoxColumn.Name = "orderDataGridViewTextBoxColumn";
+            // 
+            // expectedItemsDataGridViewTextBoxColumn
+            // 
+            this.expectedItemsDataGridViewTextBoxColumn.DataPropertyName = "ExpectedItems";
+            this.expectedItemsDataGridViewTextBoxColumn.HeaderText = "Planlagt Antal";
+            this.expectedItemsDataGridViewTextBoxColumn.Name = "expectedItemsDataGridViewTextBoxColumn";
+            // 
+            // producedItemsPerHourDataGridViewTextBoxColumn
+            // 
+            this.producedItemsPerHourDataGridViewTextBoxColumn.DataPropertyName = "ProducedItemsPerHour";
+            this.producedItemsPerHourDataGridViewTextBoxColumn.HeaderText = "Antal pr. time";
+            this.producedItemsPerHourDataGridViewTextBoxColumn.Name = "producedItemsPerHourDataGridViewTextBoxColumn";
+            this.producedItemsPerHourDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // ValidatedItemsPerHour
             // 
             this.ValidatedItemsPerHour.DataPropertyName = "ValidatedItemsPerHour";
             this.ValidatedItemsPerHour.HeaderText = "Valideret antal pr. time";
             this.ValidatedItemsPerHour.Name = "ValidatedItemsPerHour";
+            // 
+            // productionStartDataGridViewTextBoxColumn
+            // 
+            this.productionStartDataGridViewTextBoxColumn.DataPropertyName = "ProductionStart";
+            this.productionStartDataGridViewTextBoxColumn.HeaderText = "Start";
+            this.productionStartDataGridViewTextBoxColumn.Name = "productionStartDataGridViewTextBoxColumn";
+            this.productionStartDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // productionViewEntityBindingSource
+            // 
+            this.productionViewEntityBindingSource.DataSource = typeof(Mikadocs.OEE.ManagementConsole.ProductionViewEntity);
             // 
             // productionLegDataGrid
             // 
@@ -184,6 +226,40 @@
             this.productionLegDataGrid.Size = new System.Drawing.Size(671, 90);
             this.productionLegDataGrid.TabIndex = 1;
             this.productionLegDataGrid.SelectionChanged += new System.EventHandler(this.OnProductionLegSelectionChanged);
+            // 
+            // productionStartDataGridViewTextBoxColumn1
+            // 
+            this.productionStartDataGridViewTextBoxColumn1.DataPropertyName = "ProductionStart";
+            this.productionStartDataGridViewTextBoxColumn1.HeaderText = "Start";
+            this.productionStartDataGridViewTextBoxColumn1.Name = "productionStartDataGridViewTextBoxColumn1";
+            // 
+            // productionEndDataGridViewTextBoxColumn
+            // 
+            this.productionEndDataGridViewTextBoxColumn.DataPropertyName = "ProductionEnd";
+            this.productionEndDataGridViewTextBoxColumn.HeaderText = "Slut";
+            this.productionEndDataGridViewTextBoxColumn.Name = "productionEndDataGridViewTextBoxColumn";
+            // 
+            // counterStartDataGridViewTextBoxColumn
+            // 
+            this.counterStartDataGridViewTextBoxColumn.DataPropertyName = "CounterStart";
+            this.counterStartDataGridViewTextBoxColumn.HeaderText = "Tæller Start";
+            this.counterStartDataGridViewTextBoxColumn.Name = "counterStartDataGridViewTextBoxColumn";
+            // 
+            // counterEndDataGridViewTextBoxColumn
+            // 
+            this.counterEndDataGridViewTextBoxColumn.DataPropertyName = "CounterEnd";
+            this.counterEndDataGridViewTextBoxColumn.HeaderText = "Tæller Slut";
+            this.counterEndDataGridViewTextBoxColumn.Name = "counterEndDataGridViewTextBoxColumn";
+            // 
+            // discardedItemsDataGridViewTextBoxColumn
+            // 
+            this.discardedItemsDataGridViewTextBoxColumn.DataPropertyName = "DiscardedItems";
+            this.discardedItemsDataGridViewTextBoxColumn.HeaderText = "Kasseret Antal";
+            this.discardedItemsDataGridViewTextBoxColumn.Name = "discardedItemsDataGridViewTextBoxColumn";
+            // 
+            // productionLegViewEntityBindingSource
+            // 
+            this.productionLegViewEntityBindingSource.DataSource = typeof(Mikadocs.OEE.ManagementConsole.ProductionLegViewEntity);
             // 
             // productionLabel
             // 
@@ -244,6 +320,31 @@
             this.productionStopRegistrationGridView.Size = new System.Drawing.Size(671, 90);
             this.productionStopRegistrationGridView.TabIndex = 5;
             // 
+            // productionStopDataGridViewTextBoxColumn
+            // 
+            this.productionStopDataGridViewTextBoxColumn.DataPropertyName = "ProductionStop";
+            this.productionStopDataGridViewTextBoxColumn.DataSource = this.productionStopViewEntityBindingSource;
+            this.productionStopDataGridViewTextBoxColumn.DisplayMember = "Name";
+            this.productionStopDataGridViewTextBoxColumn.HeaderText = "Stop";
+            this.productionStopDataGridViewTextBoxColumn.Name = "productionStopDataGridViewTextBoxColumn";
+            this.productionStopDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.productionStopDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.productionStopDataGridViewTextBoxColumn.ValueMember = "Name";
+            // 
+            // productionStopViewEntityBindingSource
+            // 
+            this.productionStopViewEntityBindingSource.DataSource = typeof(Mikadocs.OEE.ManagementConsole.ProductionStopViewEntity);
+            // 
+            // durationDataGridViewTextBoxColumn
+            // 
+            this.durationDataGridViewTextBoxColumn.DataPropertyName = "Duration";
+            this.durationDataGridViewTextBoxColumn.HeaderText = "Varighed";
+            this.durationDataGridViewTextBoxColumn.Name = "durationDataGridViewTextBoxColumn";
+            // 
+            // productionStopRegistrationViewEntityBindingSource
+            // 
+            this.productionStopRegistrationViewEntityBindingSource.DataSource = typeof(Mikadocs.OEE.ManagementConsole.ProductionStopRegistrationViewEntity);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -286,6 +387,18 @@
             this.Date.HeaderText = "Dato";
             this.Date.Name = "Date";
             this.Date.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Team";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Hold";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // productionShiftViewEntityBindingSource
+            // 
+            this.productionShiftViewEntityBindingSource.AllowNew = false;
+            this.productionShiftViewEntityBindingSource.DataSource = typeof(Mikadocs.OEE.ManagementConsole.ProductionShiftViewEntity);
             // 
             // filterPanel
             // 
@@ -449,119 +562,6 @@
             this.cbTeam.TabIndex = 11;
             this.cbTeam.SelectedValueChanged += new System.EventHandler(this.OnValueChanged);
             // 
-            // machineDataGridViewTextBoxColumn
-            // 
-            this.machineDataGridViewTextBoxColumn.DataPropertyName = "Machine";
-            this.machineDataGridViewTextBoxColumn.HeaderText = "Maskine";
-            this.machineDataGridViewTextBoxColumn.Name = "machineDataGridViewTextBoxColumn";
-            // 
-            // productDataGridViewTextBoxColumn
-            // 
-            this.productDataGridViewTextBoxColumn.DataPropertyName = "Product";
-            this.productDataGridViewTextBoxColumn.HeaderText = "Produkt";
-            this.productDataGridViewTextBoxColumn.Name = "productDataGridViewTextBoxColumn";
-            // 
-            // orderDataGridViewTextBoxColumn
-            // 
-            this.orderDataGridViewTextBoxColumn.DataPropertyName = "Order";
-            this.orderDataGridViewTextBoxColumn.HeaderText = "Ordre";
-            this.orderDataGridViewTextBoxColumn.Name = "orderDataGridViewTextBoxColumn";
-            // 
-            // expectedItemsDataGridViewTextBoxColumn
-            // 
-            this.expectedItemsDataGridViewTextBoxColumn.DataPropertyName = "ExpectedItems";
-            this.expectedItemsDataGridViewTextBoxColumn.HeaderText = "Planlagt Antal";
-            this.expectedItemsDataGridViewTextBoxColumn.Name = "expectedItemsDataGridViewTextBoxColumn";
-            // 
-            // producedItemsPerHourDataGridViewTextBoxColumn
-            // 
-            this.producedItemsPerHourDataGridViewTextBoxColumn.DataPropertyName = "ProducedItemsPerHour";
-            this.producedItemsPerHourDataGridViewTextBoxColumn.HeaderText = "Antal pr. time";
-            this.producedItemsPerHourDataGridViewTextBoxColumn.Name = "producedItemsPerHourDataGridViewTextBoxColumn";
-            this.producedItemsPerHourDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // productionStartDataGridViewTextBoxColumn
-            // 
-            this.productionStartDataGridViewTextBoxColumn.DataPropertyName = "ProductionStart";
-            this.productionStartDataGridViewTextBoxColumn.HeaderText = "Start";
-            this.productionStartDataGridViewTextBoxColumn.Name = "productionStartDataGridViewTextBoxColumn";
-            this.productionStartDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // productionViewEntityBindingSource
-            // 
-            this.productionViewEntityBindingSource.DataSource = typeof(Mikadocs.OEE.ManagementConsole.ProductionViewEntity);
-            // 
-            // productionStartDataGridViewTextBoxColumn1
-            // 
-            this.productionStartDataGridViewTextBoxColumn1.DataPropertyName = "ProductionStart";
-            this.productionStartDataGridViewTextBoxColumn1.HeaderText = "Start";
-            this.productionStartDataGridViewTextBoxColumn1.Name = "productionStartDataGridViewTextBoxColumn1";
-            // 
-            // productionEndDataGridViewTextBoxColumn
-            // 
-            this.productionEndDataGridViewTextBoxColumn.DataPropertyName = "ProductionEnd";
-            this.productionEndDataGridViewTextBoxColumn.HeaderText = "Slut";
-            this.productionEndDataGridViewTextBoxColumn.Name = "productionEndDataGridViewTextBoxColumn";
-            // 
-            // counterStartDataGridViewTextBoxColumn
-            // 
-            this.counterStartDataGridViewTextBoxColumn.DataPropertyName = "CounterStart";
-            this.counterStartDataGridViewTextBoxColumn.HeaderText = "Tæller Start";
-            this.counterStartDataGridViewTextBoxColumn.Name = "counterStartDataGridViewTextBoxColumn";
-            // 
-            // counterEndDataGridViewTextBoxColumn
-            // 
-            this.counterEndDataGridViewTextBoxColumn.DataPropertyName = "CounterEnd";
-            this.counterEndDataGridViewTextBoxColumn.HeaderText = "Tæller Slut";
-            this.counterEndDataGridViewTextBoxColumn.Name = "counterEndDataGridViewTextBoxColumn";
-            // 
-            // discardedItemsDataGridViewTextBoxColumn
-            // 
-            this.discardedItemsDataGridViewTextBoxColumn.DataPropertyName = "DiscardedItems";
-            this.discardedItemsDataGridViewTextBoxColumn.HeaderText = "Kasseret Antal";
-            this.discardedItemsDataGridViewTextBoxColumn.Name = "discardedItemsDataGridViewTextBoxColumn";
-            // 
-            // productionLegViewEntityBindingSource
-            // 
-            this.productionLegViewEntityBindingSource.DataSource = typeof(Mikadocs.OEE.ManagementConsole.ProductionLegViewEntity);
-            // 
-            // productionStopDataGridViewTextBoxColumn
-            // 
-            this.productionStopDataGridViewTextBoxColumn.DataPropertyName = "ProductionStop";
-            this.productionStopDataGridViewTextBoxColumn.DataSource = this.productionStopViewEntityBindingSource;
-            this.productionStopDataGridViewTextBoxColumn.DisplayMember = "Name";
-            this.productionStopDataGridViewTextBoxColumn.HeaderText = "Stop";
-            this.productionStopDataGridViewTextBoxColumn.Name = "productionStopDataGridViewTextBoxColumn";
-            this.productionStopDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.productionStopDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.productionStopDataGridViewTextBoxColumn.ValueMember = "Name";
-            // 
-            // productionStopViewEntityBindingSource
-            // 
-            this.productionStopViewEntityBindingSource.DataSource = typeof(Mikadocs.OEE.ManagementConsole.ProductionStopViewEntity);
-            // 
-            // durationDataGridViewTextBoxColumn
-            // 
-            this.durationDataGridViewTextBoxColumn.DataPropertyName = "Duration";
-            this.durationDataGridViewTextBoxColumn.HeaderText = "Varighed";
-            this.durationDataGridViewTextBoxColumn.Name = "durationDataGridViewTextBoxColumn";
-            // 
-            // productionStopRegistrationViewEntityBindingSource
-            // 
-            this.productionStopRegistrationViewEntityBindingSource.DataSource = typeof(Mikadocs.OEE.ManagementConsole.ProductionStopRegistrationViewEntity);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Team";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Hold";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // productionShiftViewEntityBindingSource
-            // 
-            this.productionShiftViewEntityBindingSource.AllowNew = false;
-            this.productionShiftViewEntityBindingSource.DataSource = typeof(Mikadocs.OEE.ManagementConsole.ProductionShiftViewEntity);
-            // 
             // ProductionDataGridUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -573,16 +573,16 @@
             this.centerPanel.ResumeLayout(false);
             this.centerPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productionDataGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productionLegDataGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productionStopRegistrationGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productionShiftDataGrid)).EndInit();
-            this.filterPanel.ResumeLayout(false);
-            this.filterPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productionViewEntityBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productionLegDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionLegViewEntityBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productionStopRegistrationGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionStopViewEntityBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionStopRegistrationViewEntityBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productionShiftDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionShiftViewEntityBindingSource)).EndInit();
+            this.filterPanel.ResumeLayout(false);
+            this.filterPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }

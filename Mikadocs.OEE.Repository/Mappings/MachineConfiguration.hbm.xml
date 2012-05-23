@@ -10,7 +10,7 @@
 
     <property name="BaseCost" unique="true"/>
 
-    <list name="AvailableProductionStopsList" access="field.camelcase" lazy="false" table="AvailableProductionStops">
+    <list name="AvailableProductionStopsList" lazy="false" table="AvailableProductionStops">
       <key column="MachineConfigurationId" />
       <index column="PresentationOrder" />
       <many-to-many column="ProductionStopId" class="Mikadocs.OEE.ProductionStop, Mikadocs.OEE" />

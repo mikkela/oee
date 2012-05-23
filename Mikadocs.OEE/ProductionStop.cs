@@ -37,6 +37,6 @@ namespace Mikadocs.OEE
         {
             get { return planned; }
             set { planned = value; }
-        }
+        }        
     }
 }

@@ -10,7 +10,7 @@
     <many-to-one name="Team" column="ProductionTeamId" access="nosetter.camelcase" lazy="false"/>
     <property name="Date" column="ProductionDate" access="nosetter.camelcase" />
 
-    <bag name="ProductionLegList" access="field.camelcase" lazy="false">
+    <bag name="ProductionLegList" lazy="false">
       <key column="ProductionShiftId" />
       <one-to-many class="Mikadocs.OEE.ProductionLeg, Mikadocs.OEE" />
     </bag>

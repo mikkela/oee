@@ -13,7 +13,7 @@
     <property name="CounterEnd" access="nosetter.camelcase"/>
     <property name="DiscardedItems" access="nosetter.camelcase"/>
 
-    <bag name="ProductionStopRegistrationList" access="field.camelcase" table="ProductionStopRegistration" lazy="false">
+    <bag name="ProductionStopRegistrationList" table="ProductionStopRegistration" lazy="false">
       <key column="ProductionLegId" />
       <composite-element class="Mikadocs.OEE.ProductionStopRegistration, Mikadocs.OEE">
         <many-to-one name="Stop" column="ProductionStopId" access="nosetter.camelcase" lazy="false"/>

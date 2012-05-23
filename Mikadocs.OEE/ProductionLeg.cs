@@ -12,7 +12,7 @@ namespace Mikadocs.OEE
         private long counterStart;
         private long counterEnd;
         private long discardedItems;
-        private IList<ProductionStopRegistration> productionStopRegistrationList = new List<ProductionStopRegistration>();
+        private IList<ProductionStopRegistration> ProductionStopRegistrationList { get; set; }
 
         internal ProductionLeg() { }
 
@@ -22,7 +22,7 @@ namespace Mikadocs.OEE
                 throw new ArgumentException("The value cannot be negative", "counterStart");
 
             this.shift = shift;
-            this.productionStopRegistrationList = new List<ProductionStopRegistration>();
+            this.ProductionStopRegistrationList = new List<ProductionStopRegistration>();
             this.productionStart = productionStart;
             this.productionEnd = productionStart;
             this.counterStart = counterStart;
@@ -94,17 +94,17 @@ namespace Mikadocs.OEE
         {
             get
             {
-                return productionStopRegistrationList;
+                return ProductionStopRegistrationList;
             }
             set
             {
-                productionStopRegistrationList = new List<ProductionStopRegistration>(value);
+                ProductionStopRegistrationList = new List<ProductionStopRegistration>(value);
             }
         }
 
         public virtual void AddProductionStopRegistration(ProductionStopRegistration registration)
         {
-            productionStopRegistrationList.Add(registration);
+            ProductionStopRegistrationList.Add(registration);
         }
 
         public virtual TimeSpan ProductionStopDuration
@@ -112,7 +112,7 @@ namespace Mikadocs.OEE
             get
             {
                 TimeSpan result = TimeSpan.Zero;
-                foreach (ProductionStopRegistration stopRegistration in productionStopRegistrationList)
+                foreach (ProductionStopRegistration stopRegistration in ProductionStopRegistrationList)
                     result += stopRegistration.Duration;
 
                 return result;
