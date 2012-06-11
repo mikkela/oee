@@ -34,6 +34,7 @@
             this.btnPrint = new System.Windows.Forms.Button();
             this.pnlBorder = new System.Windows.Forms.Panel();
             this.pnlDisplay = new System.Windows.Forms.Panel();
+            this.ucReport = new Mikadocs.OEE.ManagementConsole.ReportControl();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.pnlTopLeft = new System.Windows.Forms.Panel();
             this.pnlHeader = new System.Windows.Forms.Panel();
@@ -43,21 +44,8 @@
             this.pnlToolbarRight = new System.Windows.Forms.Panel();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.pnlToolbarLeft = new System.Windows.Forms.Panel();
-            this.pnlSearchCriteria = new System.Windows.Forms.TableLayoutPanel();
-            this.lblPeriodStart = new System.Windows.Forms.Label();
-            this.dtPeriodStart = new System.Windows.Forms.DateTimePicker();
-            this.lblPeriodEnd = new System.Windows.Forms.Label();
-            this.dtPeriodEnd = new System.Windows.Forms.DateTimePicker();
-            this.lblProduct = new System.Windows.Forms.Label();
-            this.lblMachine = new System.Windows.Forms.Label();
-            this.txtProduct = new System.Windows.Forms.TextBox();
-            this.cbMachine = new System.Windows.Forms.ComboBox();
-            this.lblOrder = new System.Windows.Forms.Label();
-            this.txtOrder = new System.Windows.Forms.TextBox();
-            this.lblTeam = new System.Windows.Forms.Label();
-            this.cbTeam = new System.Windows.Forms.ComboBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.ucReport = new Mikadocs.OEE.ManagementConsole.ReportControl();
+            this.productionFilterUserControl1 = new Mikadocs.OEE.UserControls.ProductionFilterUserControl();
             this.pnlBorder.SuspendLayout();
             this.pnlDisplay.SuspendLayout();
             this.pnlTop.SuspendLayout();
@@ -67,7 +55,6 @@
             this.pnlToolbar.SuspendLayout();
             this.pnlToolbarRight.SuspendLayout();
             this.pnlToolbarLeft.SuspendLayout();
-            this.pnlSearchCriteria.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtHeader
@@ -128,6 +115,15 @@
             this.pnlDisplay.Name = "pnlDisplay";
             this.pnlDisplay.Size = new System.Drawing.Size(938, 335);
             this.pnlDisplay.TabIndex = 19;
+            // 
+            // ucReport
+            // 
+            this.ucReport.BackColor = System.Drawing.SystemColors.Window;
+            this.ucReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucReport.Location = new System.Drawing.Point(0, 0);
+            this.ucReport.Name = "ucReport";
+            this.ucReport.Size = new System.Drawing.Size(938, 335);
+            this.ucReport.TabIndex = 0;
             // 
             // pnlTop
             // 
@@ -234,189 +230,19 @@
             // 
             // pnlToolbarLeft
             // 
-            this.pnlToolbarLeft.Controls.Add(this.pnlSearchCriteria);
+            this.pnlToolbarLeft.Controls.Add(this.productionFilterUserControl1);
             this.pnlToolbarLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlToolbarLeft.Location = new System.Drawing.Point(0, 0);
             this.pnlToolbarLeft.Name = "pnlToolbarLeft";
             this.pnlToolbarLeft.Size = new System.Drawing.Size(600, 75);
             this.pnlToolbarLeft.TabIndex = 11;
             // 
-            // pnlSearchCriteria
+            // productionFilterUserControl1
             // 
-            this.pnlSearchCriteria.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.pnlSearchCriteria.ColumnCount = 6;
-            this.pnlSearchCriteria.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.pnlSearchCriteria.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.pnlSearchCriteria.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.pnlSearchCriteria.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.pnlSearchCriteria.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.pnlSearchCriteria.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.pnlSearchCriteria.Controls.Add(this.lblPeriodStart, 0, 0);
-            this.pnlSearchCriteria.Controls.Add(this.dtPeriodStart, 1, 0);
-            this.pnlSearchCriteria.Controls.Add(this.lblPeriodEnd, 0, 1);
-            this.pnlSearchCriteria.Controls.Add(this.dtPeriodEnd, 1, 1);
-            this.pnlSearchCriteria.Controls.Add(this.lblProduct, 2, 1);
-            this.pnlSearchCriteria.Controls.Add(this.lblMachine, 4, 0);
-            this.pnlSearchCriteria.Controls.Add(this.txtProduct, 3, 1);
-            this.pnlSearchCriteria.Controls.Add(this.cbMachine, 5, 0);
-            this.pnlSearchCriteria.Controls.Add(this.lblOrder, 2, 0);
-            this.pnlSearchCriteria.Controls.Add(this.txtOrder, 3, 0);
-            this.pnlSearchCriteria.Controls.Add(this.lblTeam, 4, 1);
-            this.pnlSearchCriteria.Controls.Add(this.cbTeam, 5, 1);
-            this.pnlSearchCriteria.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSearchCriteria.Location = new System.Drawing.Point(0, 0);
-            this.pnlSearchCriteria.Name = "pnlSearchCriteria";
-            this.pnlSearchCriteria.RowCount = 2;
-            this.pnlSearchCriteria.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.pnlSearchCriteria.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.pnlSearchCriteria.Size = new System.Drawing.Size(600, 75);
-            this.pnlSearchCriteria.TabIndex = 0;
-            // 
-            // lblPeriodStart
-            // 
-            this.lblPeriodStart.AutoSize = true;
-            this.lblPeriodStart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPeriodStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.lblPeriodStart.ForeColor = System.Drawing.Color.White;
-            this.lblPeriodStart.Location = new System.Drawing.Point(4, 1);
-            this.lblPeriodStart.Name = "lblPeriodStart";
-            this.lblPeriodStart.Size = new System.Drawing.Size(92, 36);
-            this.lblPeriodStart.TabIndex = 0;
-            this.lblPeriodStart.Text = "PeriodStart";
-            this.lblPeriodStart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // dtPeriodStart
-            // 
-            this.dtPeriodStart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtPeriodStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.dtPeriodStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtPeriodStart.Location = new System.Drawing.Point(103, 4);
-            this.dtPeriodStart.Name = "dtPeriodStart";
-            this.dtPeriodStart.Size = new System.Drawing.Size(92, 26);
-            this.dtPeriodStart.TabIndex = 1;
-            // 
-            // lblPeriodEnd
-            // 
-            this.lblPeriodEnd.AutoSize = true;
-            this.lblPeriodEnd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPeriodEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.lblPeriodEnd.ForeColor = System.Drawing.Color.White;
-            this.lblPeriodEnd.Location = new System.Drawing.Point(4, 38);
-            this.lblPeriodEnd.Name = "lblPeriodEnd";
-            this.lblPeriodEnd.Size = new System.Drawing.Size(92, 36);
-            this.lblPeriodEnd.TabIndex = 2;
-            this.lblPeriodEnd.Text = "PeriodEnd";
-            this.lblPeriodEnd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // dtPeriodEnd
-            // 
-            this.dtPeriodEnd.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.dtPeriodEnd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtPeriodEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.dtPeriodEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtPeriodEnd.Location = new System.Drawing.Point(103, 41);
-            this.dtPeriodEnd.Name = "dtPeriodEnd";
-            this.dtPeriodEnd.Size = new System.Drawing.Size(92, 26);
-            this.dtPeriodEnd.TabIndex = 3;
-            // 
-            // lblProduct
-            // 
-            this.lblProduct.AutoSize = true;
-            this.lblProduct.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.lblProduct.ForeColor = System.Drawing.Color.White;
-            this.lblProduct.Location = new System.Drawing.Point(202, 38);
-            this.lblProduct.Name = "lblProduct";
-            this.lblProduct.Size = new System.Drawing.Size(92, 36);
-            this.lblProduct.TabIndex = 4;
-            this.lblProduct.Text = "Product";
-            this.lblProduct.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblMachine
-            // 
-            this.lblMachine.AutoSize = true;
-            this.lblMachine.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMachine.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.lblMachine.ForeColor = System.Drawing.Color.White;
-            this.lblMachine.Location = new System.Drawing.Point(400, 1);
-            this.lblMachine.Name = "lblMachine";
-            this.lblMachine.Size = new System.Drawing.Size(92, 36);
-            this.lblMachine.TabIndex = 5;
-            this.lblMachine.Text = "Machine";
-            this.lblMachine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // txtProduct
-            // 
-            this.txtProduct.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.txtProduct.Location = new System.Drawing.Point(301, 41);
-            this.txtProduct.Name = "txtProduct";
-            this.txtProduct.Size = new System.Drawing.Size(92, 26);
-            this.txtProduct.TabIndex = 6;
-            // 
-            // cbMachine
-            // 
-            this.cbMachine.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbMachine.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.cbMachine.FormattingEnabled = true;
-            this.cbMachine.Location = new System.Drawing.Point(499, 4);
-            this.cbMachine.Name = "cbMachine";
-            this.cbMachine.Size = new System.Drawing.Size(97, 28);
-            this.cbMachine.TabIndex = 7;
-            // 
-            // lblOrder
-            // 
-            this.lblOrder.AutoSize = true;
-            this.lblOrder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.lblOrder.ForeColor = System.Drawing.Color.White;
-            this.lblOrder.Location = new System.Drawing.Point(202, 1);
-            this.lblOrder.Name = "lblOrder";
-            this.lblOrder.Size = new System.Drawing.Size(92, 36);
-            this.lblOrder.TabIndex = 8;
-            this.lblOrder.Text = "Order";
-            this.lblOrder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // txtOrder
-            // 
-            this.txtOrder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.txtOrder.Location = new System.Drawing.Point(301, 4);
-            this.txtOrder.Name = "txtOrder";
-            this.txtOrder.Size = new System.Drawing.Size(92, 26);
-            this.txtOrder.TabIndex = 9;
-            // 
-            // lblTeam
-            // 
-            this.lblTeam.AutoSize = true;
-            this.lblTeam.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTeam.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.lblTeam.ForeColor = System.Drawing.Color.White;
-            this.lblTeam.Location = new System.Drawing.Point(400, 38);
-            this.lblTeam.Name = "lblTeam";
-            this.lblTeam.Size = new System.Drawing.Size(92, 36);
-            this.lblTeam.TabIndex = 10;
-            this.lblTeam.Text = "Team";
-            this.lblTeam.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // cbTeam
-            // 
-            this.cbTeam.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbTeam.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.cbTeam.FormattingEnabled = true;
-            this.cbTeam.Location = new System.Drawing.Point(499, 41);
-            this.cbTeam.Name = "cbTeam";
-            this.cbTeam.Size = new System.Drawing.Size(97, 28);
-            this.cbTeam.TabIndex = 11;
-            // 
-            // ucReport
-            // 
-            this.ucReport.BackColor = System.Drawing.SystemColors.Window;
-            this.ucReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucReport.Location = new System.Drawing.Point(0, 0);
-            this.ucReport.Name = "ucReport";
-            this.ucReport.Size = new System.Drawing.Size(938, 335);
-            this.ucReport.TabIndex = 0;
+            this.productionFilterUserControl1.Location = new System.Drawing.Point(-1, -3);
+            this.productionFilterUserControl1.Name = "productionFilterUserControl1";
+            this.productionFilterUserControl1.Size = new System.Drawing.Size(601, 79);
+            this.productionFilterUserControl1.TabIndex = 0;
             // 
             // GenerateReportForm
             // 
@@ -440,8 +266,6 @@
             this.pnlToolbar.ResumeLayout(false);
             this.pnlToolbarRight.ResumeLayout(false);
             this.pnlToolbarLeft.ResumeLayout(false);
-            this.pnlSearchCriteria.ResumeLayout(false);
-            this.pnlSearchCriteria.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -460,21 +284,9 @@
         private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.Panel pnlBorder;
         private System.Windows.Forms.Panel pnlDisplay;
-        private System.Windows.Forms.TableLayoutPanel pnlSearchCriteria;
-        private System.Windows.Forms.Label lblPeriodStart;
-        private System.Windows.Forms.DateTimePicker dtPeriodStart;
-        private System.Windows.Forms.Label lblPeriodEnd;
-        private System.Windows.Forms.DateTimePicker dtPeriodEnd;
-        private System.Windows.Forms.Label lblProduct;
-        private System.Windows.Forms.Label lblMachine;
-        private System.Windows.Forms.TextBox txtProduct;
         private ReportControl ucReport;
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.ComboBox cbMachine;
-        private System.Windows.Forms.Label lblOrder;
-        private System.Windows.Forms.TextBox txtOrder;
-        private System.Windows.Forms.Label lblTeam;
-        private System.Windows.Forms.ComboBox cbTeam;  
+        private UserControls.ProductionFilterUserControl productionFilterUserControl1;  
     }
 }

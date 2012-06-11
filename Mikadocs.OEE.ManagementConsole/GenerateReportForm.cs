@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing.Printing;
+using System.Linq;
 using System.Windows.Forms;
 
 using Mikadocs.OEE.Repository;
@@ -17,24 +18,14 @@ namespace Mikadocs.OEE.ManagementConsole
 
             _printDocument.DefaultPageSettings.Landscape = true;
             _printDocument.PrintPage += OnPrintDocument;
-            cbMachine.DataSource = Settings.Default.Machines;
-            cbMachine.SelectedItem = null;
-
-            cbTeam.DataSource = GetTeams();
-            cbTeam.DisplayMember = "Name";
-            cbTeam.SelectedItem = null;
-
+            productionFilterUserControl1.Initialize(Settings.Default.Machines.Cast<string>().ToList(), GetTeams());
+            
             SetTexts();            
         }
 
         private void SetTexts()
         {
-            txtHeader.Text = Strings.Header;
-            lblPeriodStart.Text = Strings.PeriodStart;
-            lblPeriodEnd.Text = Strings.PeriodEnd;
-            lblProduct.Text = Strings.Product;
-            lblMachine.Text = Strings.Machine;
-            lblOrder.Text = Strings.Order;
+            txtHeader.Text = Strings.Header;            
         }
 
         private void GenerateReport()
@@ -47,17 +38,7 @@ namespace Mikadocs.OEE.ManagementConsole
                 {
 
                     var repository = factory.CreateProductionQueryRepository(true);
-
-                    ProductionQuery query = new ProductionQuery().AddDateRange(dtPeriodStart.Value,
-                                                                               dtPeriodEnd.Value);
-                    if (!string.IsNullOrEmpty(txtProduct.Text))
-                        query = query.AddProduct(new ProductNumber(txtProduct.Text));
-                    if (!string.IsNullOrEmpty(txtOrder.Text))
-                        query = query.AddOrder(new OrderNumber(txtOrder.Text));
-                    if (cbMachine.SelectedItem != null)
-                        query = query.AddMachine(cbMachine.SelectedItem.ToString());
-                    if (cbTeam.SelectedItem != null)
-                        query = query.AddTeam((ProductionTeam) cbTeam.SelectedItem);
+                    var query = productionFilterUserControl1.Query;
 
                     ShowResults(query, repository.LoadProductions(query));
                 }
