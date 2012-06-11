@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Mikadocs.OEE.Repository
 {
-    public interface IProductionQueryRepository : IDisposable
+    public interface IProductionQueryRepository
     {
         IEnumerable<Production> LoadProductions(ProductionQuery query);
 

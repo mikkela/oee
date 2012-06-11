@@ -20,17 +20,16 @@ namespace Mikadocs.OEE.Repository.Test
         [SetUp()]
         public void SetUp()
         {
-            factory = new RepositoryFactory(); ;
+            factory = new RepositoryFactory();
+            ;
 
             team1 = new ProductionTeam("Daghold");
             team2 = new ProductionTeam("Nathold");
             team3 = new ProductionTeam("Test");
-            using (IEntityRepository<ProductionTeam> repository = factory.CreateEntityRepository<ProductionTeam>())
-            {
-                repository.Save(team1);
-                repository.Save(team2);
-                repository.Save(team3);
-            }
+            var repository = factory.CreateEntityRepository();
+            repository.Save(team1);
+            repository.Save(team2);
+            repository.Save(team3);
         }
 
         [Test]

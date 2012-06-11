@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 using Mikadocs.OEE.Repository;
@@ -42,38 +36,32 @@ namespace Mikadocs.OEE.DataEntry
             lblHeader.Text = Strings.UseExistingOrder;
         }
 
-        private string LoadOrderNumber(long productionId)
+        private static string LoadOrderNumber(long productionId)
         {
-            using (RepositoryFactory factory = new RepositoryFactory())
+            using (var factory = new RepositoryFactory())
             {
-                using (IEntityRepository<Production> repository = factory.CreateEntityRepository<Production>())
-                {
-                    Production p = repository.Load(productionId);
-                    if (p != null)
-                        return p.Order.Number;
-                }
+                var p = factory.CreateEntityRepository().Load<Production>(productionId);
+                if (p != null)
+                    return p.Order.Number;
             }
 
             return "";
         }
 
-        private Production LoadProduction(string orderNumber)
+        private static Production LoadProduction(string orderNumber)
         {
-            using (RepositoryFactory factory = new RepositoryFactory())
+            using (var factory = new RepositoryFactory())
             {
-                using (IProductionQueryRepository repository = factory.CreateProductionQueryRepository())
-                {
-                    return repository.LoadProduction(new OrderNumber(orderNumber));
-                }
+                return factory.CreateProductionQueryRepository(true).LoadProduction(new OrderNumber(orderNumber));                
             }
         }
 
-        private void OnMouseDown(object sender, MouseEventArgs e)
+        private static void OnMouseDown(object sender, MouseEventArgs e)
         {
             GUIHelper.MaximizeButton(sender as Button);
         }
 
-        private void OnMouseUp(object sender, MouseEventArgs e)
+        private static void OnMouseUp(object sender, MouseEventArgs e)
         {
             GUIHelper.MinimizeButton(sender as Button);
         }

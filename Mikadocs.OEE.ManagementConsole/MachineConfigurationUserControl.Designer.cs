@@ -145,8 +145,8 @@
             this.pbUp.TabStop = false;
             this.toolTip.SetToolTip(this.pbUp, "Ryk op i prioritet");
             this.pbUp.Click += new System.EventHandler(this.OnMoveUp);
-            this.pbUp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this.pbUp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            this.pbUp.MouseDown += new System.Windows.Forms.MouseEventHandler(OnMouseDown);
+            this.pbUp.MouseUp += new System.Windows.Forms.MouseEventHandler(OnMouseUp);
             // 
             // pbDown
             // 
@@ -159,8 +159,8 @@
             this.pbDown.TabStop = false;
             this.toolTip.SetToolTip(this.pbDown, "Ryk ned i prioritet");
             this.pbDown.Click += new System.EventHandler(this.OnMoveDown);
-            this.pbDown.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this.pbDown.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            this.pbDown.MouseDown += new System.Windows.Forms.MouseEventHandler(OnMouseDown);
+            this.pbDown.MouseUp += new System.Windows.Forms.MouseEventHandler(OnMouseUp);
             // 
             // pbAdd
             // 
@@ -174,8 +174,8 @@
             this.pbAdd.TabStop = false;
             this.toolTip.SetToolTip(this.pbAdd, "Tilføj nyt produktionsstop");
             this.pbAdd.Click += new System.EventHandler(this.OnAddNewStop);
-            this.pbAdd.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this.pbAdd.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            this.pbAdd.MouseDown += new System.Windows.Forms.MouseEventHandler(OnMouseDown);
+            this.pbAdd.MouseUp += new System.Windows.Forms.MouseEventHandler(OnMouseUp);
             // 
             // dataGridViewTextBoxColumn1
             // 

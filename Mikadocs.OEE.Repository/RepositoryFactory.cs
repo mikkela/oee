@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
 using NHibernate;   
 
 namespace Mikadocs.OEE.Repository
@@ -15,14 +12,14 @@ namespace Mikadocs.OEE.Repository
             _session = new NHibernate.Cfg.Configuration().Configure().BuildSessionFactory().OpenSession();
         }
 
-        public IEntityRepository<TEntity> CreateEntityRepository<TEntity>() where TEntity : EntityObject
+        public IEntityRepository CreateEntityRepository()
         {
-            return new EntityRepository<TEntity>(_session);
+            return new EntityRepository(_session);
         }
 
-        public IProductionQueryRepository CreateProductionQueryRepository()
+        public IProductionQueryRepository CreateProductionQueryRepository(bool doDuplicate)
         {
-            return new ProductionQueryRepository(_session);
+            return new ProductionQueryRepository(_session, doDuplicate);
         }
 
         #region IDisposable Members

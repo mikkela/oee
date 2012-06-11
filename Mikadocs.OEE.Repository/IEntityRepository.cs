@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Mikadocs.OEE.Repository
 {
-    public interface IEntityRepository<TEntity> :IDisposable where TEntity : EntityObject
+    public interface IEntityRepository
     {
-        void Save(TEntity entity);
-        
-        TEntity Load(long id);
-        void Delete(TEntity entity);
+        void Save<TEntity>(TEntity entity) where TEntity : EntityObject;
+        void SaveAll<TEntity>(IEnumerable<TEntity> entities) where TEntity : EntityObject;
 
-        IEnumerable<TEntity> LoadAll();
+        TEntity Load<TEntity>(long id) where TEntity : EntityObject;
+        IEnumerable<TEntity> LoadAll<TEntity>() where TEntity : EntityObject;
+
+        void Delete<TEntity>(TEntity entity) where TEntity : EntityObject;
     }
 }

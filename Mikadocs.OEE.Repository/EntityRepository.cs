@@ -1,158 +1,133 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
-
 using NHibernate;
 using NHibernate.Criterion;
 
 namespace Mikadocs.OEE.Repository
 {
-    class EntityRepository<TEntity> : IEntityRepository<TEntity> where TEntity : EntityObject
+    public class EntityRepository : IEntityRepository
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private ISession session;
+        private readonly ISession _session;
 
         public EntityRepository(ISession session)
         {
-            this.session = session;
+            _session = session;
         }
 
-        #region IEntityRepository<TEntity> Members
-
-        public void Save(TEntity entity)
+        public void Save<TEntity>(TEntity entity) where TEntity : EntityObject
         {
-            log.InfoFormat("Saving entity: {0}", entity);
             bool done = false;
 
             while (!done)
             {
-                try
+                done = SaveInTransactrion(new [] {entity});
+                if (!done)
                 {
-                    using (ITransaction tx = session.BeginTransaction())
-                    {
-                        try
-                        {
-                            session.SaveOrUpdate(entity);
-                            tx.Commit();
-                            done = true;
-                        }
-                        catch (HibernateException e)
-                        {
-                            log.Error(
-                                string.Format(
-                                    "An exception occurred while saving entity: {0}. The entity is not saved.",
-                                    entity), e);
-                            tx.Rollback();
-                            session.Clear();
-                            throw new RepositoryException("Could not save the entity due to an internal exception", e);
-                        }
-                    }
-                } catch(Exception e)
-                {
-                    while (true) {
-                        try
-                        {
-                            System.Threading.Thread.Sleep(1000);
-                            if (session.Connection.State == ConnectionState.Closed ||
-                                session.Connection.State == ConnectionState.Broken)
-                                session.Connection.Open();
-                            break;
-                        }catch
-                        {
-                        }
-                    }
-                    }
+                    Wait();
+                }
 
             }
-            log.InfoFormat("Saved entity: {0}", entity);
         }
 
-        public void Delete(TEntity entity)
+        public void SaveAll<TEntity>(IEnumerable<TEntity> entities) where TEntity : EntityObject
         {
-            log.InfoFormat("Deleting entity: {0}", entity);
+            SaveInTransactrion(entities);
+        }
 
-            using (ITransaction tx = session.BeginTransaction())
+        private bool SaveInTransactrion<TEntity>(IEnumerable<TEntity> entities)
+        {
+            using (ITransaction tx = _session.BeginTransaction())
             {
                 try
                 {
-                    session.Delete(entity);
+                    foreach (var entity in entities)
+                    {
+                        _session.SaveOrUpdate(entity);    
+                    }
+                    
+                    tx.Commit();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    Log.Error("Unable to save entities", e);
+                    tx.Rollback();
+                    _session.Clear();
+                    return false;
+                }
+            }            
+        }
+
+        private void Wait()
+        {
+            try
+            {
+                System.Threading.Thread.Sleep(1000);
+                if (_session.Connection.State == ConnectionState.Closed ||
+                    _session.Connection.State == ConnectionState.Broken)
+                    _session.Connection.Open();                
+            }
+            catch
+            {
+            }
+        }
+
+        public TEntity Load<TEntity>(long id) where TEntity : EntityObject
+        {
+            try
+            {
+                ICriteria criteria = _session.CreateCriteria(typeof(TEntity));
+                criteria.Add(Restrictions.Eq("Id", id));
+
+                return criteria.UniqueResult<TEntity>();
+
+            }
+            catch (HibernateException e)
+            {
+                Log.Error(string.Format("An exception occurred while loading entity with id: {0}. The entity is not loaded.", id), e);
+
+                throw new RepositoryException("Could not load the entity due to an internal exception", e);
+            }
+        }
+
+        public IEnumerable<TEntity> LoadAll<TEntity>() where TEntity : EntityObject
+        {
+            try
+            {
+                ICriteria criteria = _session.CreateCriteria(typeof(TEntity));
+                criteria.AddOrder(new Order("Id", true));
+
+                return criteria.List<TEntity>();
+            }
+            catch (HibernateException e)
+            {
+                Log.Error(string.Format("An exception occurred while loading all entities of type: {0}. No entities were loaded.", typeof(TEntity).Name), e);
+                return new List<TEntity>();                
+            }
+        }
+
+        public void Delete<TEntity>(TEntity entity) where TEntity : EntityObject
+        {
+            using (ITransaction tx = _session.BeginTransaction())
+            {
+                try
+                {
+                    _session.Delete(entity);
                     tx.Commit();
                 }
                 catch (HibernateException e)
                 {
-                    log.Error(string.Format("An exception occurred while deleting entity: {0}. The entity is not saved.", entity), e);
+                    Log.Error(string.Format("An exception occurred while deleting entity: {0}. The entity is not saved.", entity), e);
                     tx.Rollback();
-                    session.Clear();
+                    _session.Clear();
                     throw new RepositoryException("Could not delete the entity due to an internal exception", e);
                 }
-            }
-
-            log.InfoFormat("Deleted entity: {0}", entity);
+            }            
         }
 
-        public TEntity Load(long id)
-        {
-            log.InfoFormat("Loading entity with id: {0} of type: {1}", id, typeof(TEntity).Name);
-            TEntity result = null;
-
-            try
-            {
-                ICriteria criteria = session.CreateCriteria(typeof(TEntity));
-                criteria.Add(Expression.Eq("Id", id));
-
-                result = criteria.UniqueResult<TEntity>();
-
-            }
-            catch (HibernateException e)
-            {
-                log.Error(string.Format("An exception occurred while loading entity with id: {0}. The entity is not loaded.", id), e);
-
-                throw new RepositoryException("Could not load the entity due to an internal exception", e);
-            }
-
-
-            if (result != null)
-                log.InfoFormat("Loaded entity with id: {0} of type {1}. Result is: {2}", id, typeof(TEntity).Name, result);
-            else
-                log.InfoFormat("Loaded entity with id: {0} of type {1}. No entity were found", id, typeof(TEntity).Name);
-
-            return result;
-        }
-
-        public IEnumerable<TEntity> LoadAll()
-        {
-            log.InfoFormat("Loading all entities of type: {0}", typeof(TEntity).Name);
-
-            IList<TEntity> result;
-
-            try
-            {
-                ICriteria criteria = session.CreateCriteria(typeof(TEntity));
-                criteria.AddOrder(new NHibernate.Criterion.Order("Id", true));
-
-                result = criteria.List<TEntity>();
-            }
-            catch (HibernateException e)
-            {
-                log.Error(string.Format("An exception occurred while loading all entities of type: {0}. No entities were loaded.", typeof(TEntity).Name), e);
-                result = new List<TEntity>();
-                //throw new RepositoryException("Could not load all entities due to an internal exception", e);
-            }
-
-            log.InfoFormat("Loaded all entities of type: {0}. {1} entities were found", typeof(TEntity).Name, result.Count);
-            return result;
-        }
-
-        #endregion
-
-        #region IDisposable Members
-
-        public void Dispose()
-        {            
-        }
-
-        #endregion
     }
+   
 }

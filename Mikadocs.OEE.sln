@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE.Test", "Test\U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE.Repository", "Mikadocs.OEE.Repository\Mikadocs.OEE.Repository.csproj", "{55D362C3-9048-4997-9ABD-58E84B6F4F3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE.Repository.Test", "Test\Unit\Mikadocs.OEE.Repository.Test\Mikadocs.OEE.Repository.Test.csproj", "{F7C4759F-F248-4BC0-A656-B776049D8ADE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE.DataEntry", "Mikadocs.OEE.DataEntry\Mikadocs.OEE.DataEntry.csproj", "{19D060A0-0358-4325-832A-8594E7AA27BA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE.ManagementConsole", "Mikadocs.OEE.ManagementConsole\Mikadocs.OEE.ManagementConsole.csproj", "{86DCDD35-FF51-490A-9D83-5CF5A8C3DE5B}"
@@ -45,10 +43,6 @@ Global
 		{55D362C3-9048-4997-9ABD-58E84B6F4F3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55D362C3-9048-4997-9ABD-58E84B6F4F3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55D362C3-9048-4997-9ABD-58E84B6F4F3A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F7C4759F-F248-4BC0-A656-B776049D8ADE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F7C4759F-F248-4BC0-A656-B776049D8ADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F7C4759F-F248-4BC0-A656-B776049D8ADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F7C4759F-F248-4BC0-A656-B776049D8ADE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19D060A0-0358-4325-832A-8594E7AA27BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19D060A0-0358-4325-832A-8594E7AA27BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19D060A0-0358-4325-832A-8594E7AA27BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -72,7 +66,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_UpdateFileVersion = False
 		BuildVersion_UpdateAssemblyVersion = False
+		BuildVersion_UpdateFileVersion = False
 	EndGlobalSection
 EndGlobal

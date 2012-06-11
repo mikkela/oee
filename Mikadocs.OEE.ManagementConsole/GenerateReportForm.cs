@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 using Mikadocs.OEE.Repository;
@@ -14,14 +9,14 @@ namespace Mikadocs.OEE.ManagementConsole
 {
     public partial class GenerateReportForm : Form
     {
-        private PrintDocument printDocument = new PrintDocument();
+        private readonly PrintDocument _printDocument = new PrintDocument();
         
         public GenerateReportForm()
         {
             InitializeComponent();
 
-            printDocument.DefaultPageSettings.Landscape = true;
-            printDocument.PrintPage += OnPrintDocument;
+            _printDocument.DefaultPageSettings.Landscape = true;
+            _printDocument.PrintPage += OnPrintDocument;
             cbMachine.DataSource = Settings.Default.Machines;
             cbMachine.SelectedItem = null;
 
@@ -44,28 +39,27 @@ namespace Mikadocs.OEE.ManagementConsole
 
         private void GenerateReport()
         {
-            System.Windows.Forms.Cursor cursor = Cursor.Current;
+            Cursor cursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
             try
             {
-                using (RepositoryFactory factory = new RepositoryFactory())
+                using (var factory = new RepositoryFactory())
                 {
 
-                    using (IProductionQueryRepository repository = factory.CreateProductionQueryRepository())
-                    {
-                        ProductionQuery query = new ProductionQuery().AddDateRange(dtPeriodStart.Value,
-                                                                                   dtPeriodEnd.Value);
-                        if (!string.IsNullOrEmpty(txtProduct.Text))
-                            query = query.AddProduct(new ProductNumber(txtProduct.Text));
-                        if (!string.IsNullOrEmpty(txtOrder.Text))
-                            query = query.AddOrder(new OrderNumber(txtOrder.Text));
-                        if (cbMachine.SelectedItem != null)
-                            query = query.AddMachine(cbMachine.SelectedItem.ToString());
-                        if (cbTeam.SelectedItem != null)
-                            query = query.AddTeam((ProductionTeam) cbTeam.SelectedItem);
+                    var repository = factory.CreateProductionQueryRepository(true);
 
-                        ShowResults(query, repository.LoadProductions(query));
-                    }
+                    ProductionQuery query = new ProductionQuery().AddDateRange(dtPeriodStart.Value,
+                                                                               dtPeriodEnd.Value);
+                    if (!string.IsNullOrEmpty(txtProduct.Text))
+                        query = query.AddProduct(new ProductNumber(txtProduct.Text));
+                    if (!string.IsNullOrEmpty(txtOrder.Text))
+                        query = query.AddOrder(new OrderNumber(txtOrder.Text));
+                    if (cbMachine.SelectedItem != null)
+                        query = query.AddMachine(cbMachine.SelectedItem.ToString());
+                    if (cbTeam.SelectedItem != null)
+                        query = query.AddTeam((ProductionTeam) cbTeam.SelectedItem);
+
+                    ShowResults(query, repository.LoadProductions(query));
                 }
             } finally
             {
@@ -81,31 +75,25 @@ namespace Mikadocs.OEE.ManagementConsole
             btnPrint.Enabled = true;            
         }
 
-        private IEnumerable<ProductionStop> GetProductionStops()
+        private static IEnumerable<ProductionStop> GetProductionStops()
         {
-            using (RepositoryFactory factory = new RepositoryFactory())
+            using (var factory = new RepositoryFactory())
             {
-                using (IEntityRepository<ProductionStop> repository = factory.CreateEntityRepository<ProductionStop>())
-                {
-                    return repository.LoadAll();
-                }
+                return factory.CreateEntityRepository().LoadAll<ProductionStop>();
             }
         }
 
-        private IEnumerable<ProductionTeam> GetTeams()
+        private static IEnumerable<ProductionTeam> GetTeams()
         {
-            using (RepositoryFactory factory = new RepositoryFactory())
+            using (var factory = new RepositoryFactory())
             {
-                using (IEntityRepository<ProductionTeam> repository = factory.CreateEntityRepository<ProductionTeam>())
-                {
-                    return repository.LoadAll();
-                }
+                return factory.CreateEntityRepository().LoadAll<ProductionTeam>();
             }
         }
 
         private void OnClose(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void OnPrintDocument(object sender, PrintPageEventArgs e)
@@ -115,7 +103,7 @@ namespace Mikadocs.OEE.ManagementConsole
         
         private void OnPrint(object sender, EventArgs e)
         {
-            printDocument.Print();
+            _printDocument.Print();
         }
 
         private void OnGenerate(object sender, EventArgs e)
@@ -123,12 +111,12 @@ namespace Mikadocs.OEE.ManagementConsole
             GenerateReport();
         }
 
-        private void OnMouseDown(object sender, MouseEventArgs e)
+        private static void OnMouseDown(object sender, MouseEventArgs e)
         {
             GUIHelper.MaximizeButton(sender as Button);
         }
 
-        private void OnMouseUp(object sender, MouseEventArgs e)
+        private static void OnMouseUp(object sender, MouseEventArgs e)
         {
             GUIHelper.MinimizeButton(sender as Button);
         }

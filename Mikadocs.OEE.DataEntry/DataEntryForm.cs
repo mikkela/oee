@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.Linq;
 using System.Windows.Forms;
 
 using Mikadocs.OEE.Repository;
@@ -10,9 +11,9 @@ namespace Mikadocs.OEE.DataEntry
 {
     public partial class DataEntryForm : Form
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private bool started = false;
+        private bool _started;
         private ProductionShift _currentShift;
         private RepositoryFactory _repositoryFactory;
 
@@ -85,12 +86,12 @@ namespace Mikadocs.OEE.DataEntry
             WindowState = FormWindowState.Minimized;
         }
 
-        private void OnMouseDown(object sender, MouseEventArgs e)
+        private static void OnMouseDown(object sender, MouseEventArgs e)
         {
             GUIHelper.MaximizeButton(sender as Button);
         }
 
-        private void OnMouseUp(object sender, MouseEventArgs e)
+        private static void OnMouseUp(object sender, MouseEventArgs e)
         {
             GUIHelper.MinimizeButton(sender as Button);
         }
@@ -102,19 +103,13 @@ namespace Mikadocs.OEE.DataEntry
         {
             _repositoryFactory = new RepositoryFactory();
 
-            using (IEntityRepository<ProductionTeam> productionTeamRepository = _repositoryFactory.CreateEntityRepository<ProductionTeam>())
-            {
-                _availableTeams = productionTeamRepository.LoadAll();
-            }
+            _availableTeams = _repositoryFactory.CreateEntityRepository().LoadAll<ProductionTeam>();
 
-            using (IEntityRepository<MachineConfiguration> repository = _repositoryFactory.CreateEntityRepository<MachineConfiguration>())
-            {
-                List<MachineConfiguration> list = new List<MachineConfiguration>(repository.LoadAll());
-                if (list.Count > 0)
-                    _machineConfiguration = list[0];
-                else
-                    _machineConfiguration = new MachineConfiguration(Strings.UnknownMachine, new ProductionStop[0]);
-            }
+            var machineConfigurations = _repositoryFactory.CreateEntityRepository().LoadAll<MachineConfiguration>();
+            _machineConfiguration = machineConfigurations.Any()
+                                        ? machineConfigurations.First()
+                                        : new MachineConfiguration(Strings.UnknownMachine, new ProductionStop[0]);
+
         }
 
         private void StartDataEntry()
@@ -123,12 +118,12 @@ namespace Mikadocs.OEE.DataEntry
 
             if (_currentShift == null)
             {
-                if (!started)
+                if (!_started)
                     Application.Exit();
                 return;
             }
 
-            started = true;
+            _started = true;
             LastOrder = _currentShift.Order;
             _currentValidator = new ProductionStatisticsValidator(_currentShift.CurrentLeg.ProductionStart, _currentShift.CurrentLeg.CounterStart, 0);
             UpdateHeader(_currentShift.Production);
@@ -167,59 +162,43 @@ namespace Mikadocs.OEE.DataEntry
 
         private ProductionShift FindExistingProductionShift(OrderNumber order, ProductionTeam team, DateTime date)
         {
-            using(var repository = _repositoryFactory.CreateProductionQueryRepository())
-            {
-                Production p = repository.LoadProduction(order);
-                if (p == null)
-                    return null;
-                
-                foreach(var shift in p.Shifts)
-                {
-                    if (shift.Team.Equals(team) &&
-                        shift.ProductionStart.Equals(date))
-
-                        return shift;
-                }
-
-                return null;
-            }      
-      
+            Production p = _repositoryFactory.CreateProductionQueryRepository(true).LoadProduction(order);
+            return p == null
+                       ? null
+                       : p.Shifts.FirstOrDefault(shift => shift.Team.Equals(team) && shift.ProductionStart.Equals(date));
         }
 
         private ProductionShift CreateNewProductionShift(OrderNumber order, ProductionTeam team, DateTime date)
         {
-            using (var repository = _repositoryFactory.CreateProductionQueryRepository())
+            Production p = _repositoryFactory.CreateProductionQueryRepository(true).LoadProduction(order);
+
+            using (var form = new StartShiftForm(p, date))
             {
-                Production p = repository.LoadProduction(order);
-
-                using (var form = new StartShiftForm(p, date))
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    if (form.ShowDialog() == DialogResult.OK)
+                    if (p == null)
                     {
+                        p =
+                            SaveProduction(new Production(form.Machine, form.Product, order, form.ExpectedItems,
+                                                          form.ProducedItemsPerHour, form.ValidatedSetupTime));
+
                         if (p == null)
-                        {
-                            p =
-                                SaveProduction(new Production(form.Machine, form.Product, order, form.ExpectedItems,
-                                                              form.ProducedItemsPerHour, form.ValidatedSetupTime));
+                            return null;
 
-                            if (p == null)
-                                return null;
-
-                        }
-
-                        SaveProduction(p);
-                        var shift = p.AddProductionShift(team, form.StartTime.Date);
-                        SaveShift(shift);
-                        var leg = shift.AddProductionLeg(form.StartTime, form.StartCounter);
-                        SaveLeg(leg);
-                        SaveShift(shift);
-                        SaveProduction(p);
-
-                        return shift;
                     }
 
-                    return null;
+                    SaveProduction(p);
+                    var shift = p.AddProductionShift(team, form.StartTime.Date);
+                    SaveShift(shift);
+                    var leg = shift.AddProductionLeg(form.StartTime, form.StartCounter);
+                    SaveLeg(leg);
+                    SaveShift(shift);
+                    SaveProduction(p);
+
+                    return shift;
                 }
+
+                return null;
             }
         }
 
@@ -227,15 +206,12 @@ namespace Mikadocs.OEE.DataEntry
         {
             try
             {
-                using (IEntityRepository<Production> repository = _repositoryFactory.CreateEntityRepository<Production>())
-                {
-                    repository.Save(p);
-                    return p;
-                }
+                Save(p);
+                return p;
             }
             catch (Exception ex)
             {
-                log.Error("An exception were caught while saving production.", ex);
+                Log.Error("An exception were caught while saving production.", ex);
                 MessageForm.ShowMessage(Strings.ExceptionCaught, Strings.CouldNotCreateNewProduction);
             }
 
@@ -246,14 +222,11 @@ namespace Mikadocs.OEE.DataEntry
         {
             try
             {
-                using (IEntityRepository<ProductionShift> repository = _repositoryFactory.CreateEntityRepository<ProductionShift>())
-                {
-                    repository.Save(shift);                         
-                }
+                Save(shift);                                         
             }
             catch (Exception ex)
             {
-                log.Error("An exception were caught while saving a shift.", ex);
+                Log.Error("An exception were caught while saving a shift.", ex);
                 MessageForm.ShowMessage(Strings.ExceptionCaught, Strings.CouldNotAddProductionShift);
             }
         }
@@ -262,44 +235,57 @@ namespace Mikadocs.OEE.DataEntry
         {
             try
             {
-                using (var repository = _repositoryFactory.CreateEntityRepository<ProductionLeg>())
-                {
-                    repository.Save(leg);
-                }
+                Save(leg);
             }
             catch (Exception ex)
             {
-                log.Error("An exception were caught while saving a leg.", ex);
+                Log.Error("An exception were caught while saving a leg.", ex);
                 MessageForm.ShowMessage(Strings.ExceptionCaught, Strings.CouldNotAddProductionShift);
             }
         }
 
+        private void Save(EntityObject o)
+        {
+            var repository = _repositoryFactory.CreateEntityRepository();
+            repository.Save(o);            
+        }
+
         private bool CloseProductionShift(ProductionShift shift)
         {
-            using (StatisticsDetailsForm form = new StatisticsDetailsForm(_currentValidator))
+            using (var form = new StatisticsDetailsForm(_currentValidator))
             {
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    if (shift != null &&
-                        form.UpdateTime > shift.ProductionStart.Add(Settings.Default.MaximumLegLength))
+                    if (shift != null)
                     {
-                        if (QuestionForm.ShowQuestion(Strings.ProductionShiftWarning, string.Format(Strings.ProductionLengthIsLong, Math.Floor((form.UpdateTime - shift.ProductionStart).TotalHours))) == DialogResult.Cancel)
+                        if (form.UpdateTime > shift.ProductionStart.Add(Settings.Default.MaximumLegLength))
                         {
-                            return false;
+                            if (
+                                QuestionForm.ShowQuestion(Strings.ProductionShiftWarning,
+                                                          string.Format(Strings.ProductionLengthIsLong,
+                                                                        Math.Floor(
+                                                                            (form.UpdateTime - shift.ProductionStart).
+                                                                                TotalHours))) == DialogResult.Cancel)
+                            {
+                                return false;
+                            }
                         }
-                    }
-                    try
-                    {
-                        shift.CurrentLeg.UpdateStatistics(form.UpdateTime, form.ProductionCounter, form.DiscardedItems);
-                        SaveLeg(shift.CurrentLeg);
-                        SaveShift(_currentShift);
-                        _currentValidator = new ProductionStatisticsValidator(form.UpdateTime, form.ProductionCounter, form.DiscardedItems);
-                        return true;
-                    }
-                    catch (Exception ex)
-                    {
-                        log.Error("An exception were caught while updating production counters.", ex);
-                        MessageForm.ShowMessage(Strings.ExceptionCaught, Strings.CouldNotUpdateProductionCounters);
+                        try
+                        {
+                            shift.CurrentLeg.UpdateStatistics(form.UpdateTime, form.ProductionCounter,
+                                                              form.DiscardedItems);
+                            SaveLeg(shift.CurrentLeg);
+                            SaveShift(_currentShift);
+                            _currentValidator = new ProductionStatisticsValidator(form.UpdateTime,
+                                                                                  form.ProductionCounter,
+                                                                                  form.DiscardedItems);
+                            return true;
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Error("An exception were caught while updating production counters.", ex);
+                            MessageForm.ShowMessage(Strings.ExceptionCaught, Strings.CouldNotUpdateProductionCounters);
+                        }
                     }
                 }
             }
@@ -308,7 +294,7 @@ namespace Mikadocs.OEE.DataEntry
         
         private void AddProductionStop()
         {
-            using (NewProductionStopRegistrationForm form = new NewProductionStopRegistrationForm(_currentShift.CurrentLeg, _machineConfiguration.AvailableProductionStops))
+            using (var form = new NewProductionStopRegistrationForm(_currentShift.CurrentLeg, _machineConfiguration.AvailableProductionStops))
             {
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -319,7 +305,7 @@ namespace Mikadocs.OEE.DataEntry
                     }
                     catch (Exception ex)
                     {
-                        log.Error("An exception were caught while adding production stop.", ex);
+                        Log.Error("An exception were caught while adding production stop.", ex);
                         MessageForm.ShowMessage(Strings.ExceptionCaught, Strings.CouldNotAddProductionStop);
                     }
                 }
@@ -353,7 +339,7 @@ namespace Mikadocs.OEE.DataEntry
             ucDisplay.PrintTo(g, bounds);            
         }
 
-        private OrderNumber LastOrder
+        private static OrderNumber LastOrder
         {
             get { return new OrderNumber(Settings.Default.ProductionId);}
             set

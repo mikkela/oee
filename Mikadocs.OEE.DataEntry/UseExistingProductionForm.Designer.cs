@@ -68,8 +68,8 @@
             this.btnAccept.TabIndex = 52;
             this.toolTip.SetToolTip(this.btnAccept, "OK");
             this.btnAccept.UseVisualStyleBackColor = false;
-            this.btnAccept.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this.btnAccept.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            this.btnAccept.MouseDown += new System.Windows.Forms.MouseEventHandler(OnMouseDown);
+            this.btnAccept.MouseUp += new System.Windows.Forms.MouseEventHandler(OnMouseUp);
             // 
             // btnDecline
             // 
@@ -88,8 +88,8 @@
             this.btnDecline.TabIndex = 53;
             this.toolTip.SetToolTip(this.btnDecline, "Fortryd");
             this.btnDecline.UseVisualStyleBackColor = false;
-            this.btnDecline.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this.btnDecline.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            this.btnDecline.MouseDown += new System.Windows.Forms.MouseEventHandler(OnMouseDown);
+            this.btnDecline.MouseUp += new System.Windows.Forms.MouseEventHandler(OnMouseUp);
             // 
             // txtOrderNumber
             // 

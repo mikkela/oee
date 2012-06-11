@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Windows.Forms;
 using Mikadocs.OEE.Repository;
 
@@ -38,45 +32,43 @@ namespace Mikadocs.OEE.CostCalculator
 
         public void LoadData()
         {
-            using (RepositoryFactory factory = new RepositoryFactory())
+            using (var factory = new RepositoryFactory())
             {
-                clbMachines.Items.Clear();
+                var repository = factory.CreateEntityRepository();
 
-                using (IEntityRepository<MachineConfiguration> repository = factory.CreateEntityRepository<MachineConfiguration>())
-                {
-                    foreach (var machineConfiguration in repository.LoadAll())
-                    {
-                        clbMachines.Items.Add(machineConfiguration.MachineName);
-                    }                    
-                }
-
-                clbTeam.Items.Clear();
-                using (IEntityRepository<ProductionTeam> repository = factory.CreateEntityRepository<ProductionTeam>())
-                {
-                    foreach (var team in repository.LoadAll())
-                    {
-                        clbTeam.Items.Add(new TeamItem(team));
-                    }
-                }
+                LoadMachineConfigurations(repository);
+                LoadTeams(repository);
             }
         }
+
+        private void LoadTeams(IEntityRepository repository)
+        {
+            clbTeam.Items.Clear();
+            foreach (var team in repository.LoadAll<ProductionTeam>())
+            {
+                clbTeam.Items.Add(new TeamItem(team));
+            }
+        }
+
+        private void LoadMachineConfigurations(IEntityRepository repository)
+        {
+            clbMachines.Items.Clear();                
+            foreach (var machineConfiguration in repository.LoadAll<MachineConfiguration>())
+            {
+                clbMachines.Items.Add(machineConfiguration.MachineName);
+            }
+        }
+
         public ProductionQuery Query
         {
             get
             {
-                ProductionQuery result = new ProductionQuery();
+                var result = new ProductionQuery();
 
                 result = result.AddDateRange(dtPeriodStart.Value, dtPeriodEnd.Value);
-                foreach (var item in clbMachines.CheckedItems)
-                {
-                    result = result.AddMachine(item.ToString());
-                }
+                result = clbMachines.CheckedItems.Cast<object>().Aggregate(result, (current, item) => current.AddMachine(item.ToString()));
 
-                foreach (var item in clbTeam.CheckedItems)
-                {
-                    result = result.AddTeam((item as TeamItem).Team);
-                }
-                return result;
+                return clbTeam.CheckedItems.Cast<object>().Aggregate(result, (current, item) => current.AddTeam(((TeamItem) item).Team));
             }
         }
     }

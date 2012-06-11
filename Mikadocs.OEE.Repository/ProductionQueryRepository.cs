@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿using System.Collections.Generic;
+using System.Linq;
 using NHibernate;
 using NHibernate.Criterion;
 
@@ -9,45 +7,45 @@ namespace Mikadocs.OEE.Repository
 {
     class ProductionQueryRepository : IProductionQueryRepository
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private ISession session;
+        private readonly ISession _session;
+        private readonly bool _doDuplicatew;
 
-        public ProductionQueryRepository(ISession session)
+        public ProductionQueryRepository(ISession session, bool doDuplicatew)
         {
-            this.session = session;
+            _session = session;
+            _doDuplicatew = doDuplicatew;
         }
 
         #region IProductionQueryRepository Members
 
         public IEnumerable<Production> LoadProductions(ProductionQuery query)
         {
-            //log.InfoFormat("Loading all productions matching: {0}", query);
-
             IList<Production> result = new List<Production>();
 
             try
             {
-                ICriteria criteria = session.CreateCriteria(typeof(Production));
+                ICriteria criteria = _session.CreateCriteria(typeof(Production));
 
-                List<string> machines = new List<string>(query.Machines);
-                List<ProductionTeam> teams = new List<ProductionTeam>(query.Teams);
+                var machines = new List<string>(query.Machines);
+                var teams = new List<ProductionTeam>(query.Teams);
 
 
                 if (machines.Count > 0)
                 {
-                    criteria.Add(Expression.In("Machine", machines));
+                    criteria.Add(Restrictions.In("Machine", machines));
                 }
 
                 if (query.Order != null)
-                    criteria.Add(Expression.Eq("Order", query.Order));
+                    criteria.Add(Restrictions.Eq("Order", query.Order));
 
                 if (query.Product != null)
-                    criteria.Add(Expression.Eq("Product", query.Product));
+                    criteria.Add(Restrictions.Eq("Product", query.Product));
 
-                foreach (Production p in criteria.List<Production>())
+                foreach (var p in criteria.List<Production>())
                 {
-                    Production production = p;
+                    var production = p;
 
                     if (query.DateRange != null)
                     {
@@ -56,90 +54,60 @@ namespace Mikadocs.OEE.Repository
                             continue;
 
 
-                        List<ProductionShift> shifts = new List<ProductionShift>();
+                        var shifts = production.Shifts.Where(shift => query.DateRange.First <= shift.ProductionStart.Date && shift.ProductionStart.Date <= query.DateRange.Second).ToList();
 
-                        foreach (var shift in production.Shifts)
-                        {
-                            if (query.DateRange.First <= shift.ProductionStart.Date &&
-                                shift.ProductionStart.Date <= query.DateRange.Second)
-                                shifts.Add(shift);
-
-                        }
-                            
                         if (shifts.Count == 0)
                             continue;
-                        production = Duplicate(production, shifts);
+                        if (_doDuplicatew)
+                            production = Duplicate(production, shifts);
                         
                     }
 
                     if (teams.Count > 0)
                     {
                         List<ProductionShift> shifts =
-                            new List<ProductionShift>(production.Shifts).FindAll(delegate(ProductionShift shift)
-                                                                                 {
-                                                                                     foreach (var team in teams)
-                                                                                     {
-                                                                                         if (shift.Team.Equals(team))
-                                                                                             return true;
-                                                                                     }
-                                                                                     return false;
-                                                                                 });
+                            new List<ProductionShift>(production.Shifts).FindAll(
+                                shift => Enumerable.Contains(teams, shift.Team));
 
                         if (shifts.Count == 0)
                             continue;
 
-                        production = Duplicate(production, shifts);
+                        if (_doDuplicatew)
+                            production = Duplicate(production, shifts);
                     }
                     result.Add(production);
                 }
             }
             catch (HibernateException e)
             {
-                //log.Error(string.Format("An exception occurred while loading all productions matching: {0}. No entities were loaded.", query), e);
                 throw new RepositoryException("Could not load all productions due to an internal exception", e);
             }
 
-            //log.InfoFormat("Loaded all productions matching: {0}. {1} entities were found", query, result.Count);
             return result;
         }
 
         public Production LoadProduction(OrderNumber orderNumber)
         {
-            log.InfoFormat("Loading production with order number: {0}", orderNumber);
-
-            Production result = null;
-
             try
             {
-                ICriteria criteria = session.CreateCriteria(typeof(Production));
+                ICriteria criteria = _session.CreateCriteria(typeof(Production));
 
-                criteria.Add(Expression.Eq("Order", orderNumber));
+                criteria.Add(Restrictions.Eq("Order", orderNumber));
 
-                result = criteria.UniqueResult<Production>();
+                return criteria.UniqueResult<Production>();
             }
             catch (HibernateException e)
             {
-                log.Error(string.Format("An exception occurred while loading all production with order number: {0}. No entities were loaded.", orderNumber), e);
+                Log.Error(string.Format("An exception occurred while loading all production with order number: {0}. No entities were loaded.", orderNumber), e);
                 throw new RepositoryException("Could not load production due to an internal exception", e);
-            }
-
-            log.InfoFormat("Loaded production with order number: {0}. The production were {1}found", orderNumber, (result != null) ? "" : "not ");
-            return result;
+            }            
         }
 
-        #endregion
+        #endregion        
 
-        #region IDisposable Members
-
-        public void Dispose()
-        {            
-        }
-
-        #endregion
-
-        private Production Duplicate(Production p, IEnumerable<ProductionShift> shifts)
+        private static Production Duplicate(Production p, IEnumerable<ProductionShift> shifts)
         {
-            Production production = new Production(p.Machine, p.Product, p.Order,
+            var production = new Production(p.Machine, p.Product, p.Order,
                                                     p.ExpectedItems,
                                                     p.ProducedItemsPerHour,
                                                     p.ValidatedStartTime);

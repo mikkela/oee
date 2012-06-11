@@ -97,8 +97,8 @@
             this.toolTip.SetToolTip(this.btnDataEntry, "Opdater");
             this.btnDataEntry.UseVisualStyleBackColor = false;
             this.btnDataEntry.Click += new System.EventHandler(this.OnDataEntry);
-            this.btnDataEntry.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this.btnDataEntry.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            this.btnDataEntry.MouseDown += new System.Windows.Forms.MouseEventHandler(OnMouseDown);
+            this.btnDataEntry.MouseUp += new System.Windows.Forms.MouseEventHandler(OnMouseUp);
             // 
             // btnAddStop
             // 
@@ -118,8 +118,8 @@
             this.toolTip.SetToolTip(this.btnAddStop, "Tilføj stop");
             this.btnAddStop.UseVisualStyleBackColor = false;
             this.btnAddStop.Click += new System.EventHandler(this.OnNewProductionStop);
-            this.btnAddStop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this.btnAddStop.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            this.btnAddStop.MouseDown += new System.Windows.Forms.MouseEventHandler(OnMouseDown);
+            this.btnAddStop.MouseUp += new System.Windows.Forms.MouseEventHandler(OnMouseUp);
             // 
             // btnPrint
             // 
@@ -138,8 +138,8 @@
             this.toolTip.SetToolTip(this.btnPrint, "Print");
             this.btnPrint.UseVisualStyleBackColor = false;
             this.btnPrint.Click += new System.EventHandler(this.OnPrint);
-            this.btnPrint.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this.btnPrint.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            this.btnPrint.MouseDown += new System.Windows.Forms.MouseEventHandler(OnMouseDown);
+            this.btnPrint.MouseUp += new System.Windows.Forms.MouseEventHandler(OnMouseUp);
             // 
             // pnlBorder
             // 
@@ -223,8 +223,8 @@
             this.toolTip.SetToolTip(this.btnClose, "Luk");
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.OnClose);
-            this.btnClose.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this.btnClose.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            this.btnClose.MouseDown += new System.Windows.Forms.MouseEventHandler(OnMouseDown);
+            this.btnClose.MouseUp += new System.Windows.Forms.MouseEventHandler(OnMouseUp);
             // 
             // pnlToolbar
             // 
@@ -281,8 +281,8 @@
             this.toolTip.SetToolTip(this.bthMinimize, "Minimer");
             this.bthMinimize.UseVisualStyleBackColor = false;
             this.bthMinimize.Click += new System.EventHandler(this.OnMinimize);
-            this.bthMinimize.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this.bthMinimize.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            this.bthMinimize.MouseDown += new System.Windows.Forms.MouseEventHandler(OnMouseDown);
+            this.bthMinimize.MouseUp += new System.Windows.Forms.MouseEventHandler(OnMouseUp);
             // 
             // pictureCellNotSelected
             // 

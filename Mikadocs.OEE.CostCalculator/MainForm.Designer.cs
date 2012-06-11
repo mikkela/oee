@@ -87,7 +87,7 @@
             this.cbShowType.Name = "cbShowType";
             this.cbShowType.Size = new System.Drawing.Size(121, 21);
             this.cbShowType.TabIndex = 4;
-            this.cbShowType.SelectedIndexChanged += new System.EventHandler(this.cbShowType_SelectedIndexChanged);
+            this.cbShowType.SelectedIndexChanged += new System.EventHandler(this.CbShowTypeSelectedIndexChanged);
             // 
             // label2
             // 
@@ -109,7 +109,7 @@
             this.cbCombine.Name = "cbCombine";
             this.cbCombine.Size = new System.Drawing.Size(121, 21);
             this.cbCombine.TabIndex = 6;
-            this.cbCombine.SelectedIndexChanged += new System.EventHandler(this.cbCombine_SelectedIndexChanged);
+            this.cbCombine.SelectedIndexChanged += new System.EventHandler(this.CbCombineSelectedIndexChanged);
             // 
             // btnUpdate
             // 
@@ -119,7 +119,7 @@
             this.btnUpdate.TabIndex = 7;
             this.btnUpdate.Text = "Opdater";
             this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.btnUpdate.Click += new System.EventHandler(this.BtnUpdateClick);
             // 
             // ucFilter
             // 
@@ -138,7 +138,7 @@
             this.btnUpdateBaseCost.TabIndex = 8;
             this.btnUpdateBaseCost.Text = "Opdater Omkostninger";
             this.btnUpdateBaseCost.UseVisualStyleBackColor = true;
-            this.btnUpdateBaseCost.Click += new System.EventHandler(this.btnUpdateBaseCost_Click);
+            this.btnUpdateBaseCost.Click += new System.EventHandler(this.BtnUpdateBaseCostClick);
             // 
             // MainForm
             // 
@@ -158,7 +158,7 @@
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Load += new System.EventHandler(this.MainFormLoad);
             ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

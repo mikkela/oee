@@ -18,7 +18,7 @@
                 components.Dispose();
             }
             if (disposing)
-                repository.Dispose();
+                _repositoryFactory.Dispose();
             base.Dispose(disposing);
         }
 

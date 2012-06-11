@@ -13,10 +13,10 @@ namespace Mikadocs.OEE.ManagementConsole
 {
     public partial class ManagementForm : Form
     {
-        private NewRepository repository;
+        private RepositoryFactory _repositoryFactory;
         public ManagementForm()
         {
-            repository = new NewRepository();
+            _repositoryFactory = new RepositoryFactory();
             InitializeComponent();
 
             dgProductions.AutoGenerateColumns = false;
@@ -49,7 +49,7 @@ namespace Mikadocs.OEE.ManagementConsole
         {
             return
                 new ProductionViewEntityBindingList(
-                    repository.LoadAll<Production>().Select(p => new ProductionViewEntity(p)));
+                    _repositoryFactory.CreateEntityRepository().LoadAll<Production>().Select(p => new ProductionViewEntity(p)));
         }
 
         private void GenerateReport()

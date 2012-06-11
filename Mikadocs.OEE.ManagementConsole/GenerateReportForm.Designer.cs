@@ -104,8 +104,8 @@
             this.toolTip.SetToolTip(this.btnPrint, "Print");
             this.btnPrint.UseVisualStyleBackColor = false;
             this.btnPrint.Click += new System.EventHandler(this.OnPrint);
-            this.btnPrint.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this.btnPrint.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            this.btnPrint.MouseDown += new System.Windows.Forms.MouseEventHandler(OnMouseDown);
+            this.btnPrint.MouseUp += new System.Windows.Forms.MouseEventHandler(OnMouseUp);
             // 
             // pnlBorder
             // 
@@ -189,8 +189,8 @@
             this.toolTip.SetToolTip(this.btnClose, "Luk");
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.OnClose);
-            this.btnClose.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this.btnClose.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            this.btnClose.MouseDown += new System.Windows.Forms.MouseEventHandler(OnMouseDown);
+            this.btnClose.MouseUp += new System.Windows.Forms.MouseEventHandler(OnMouseUp);
             // 
             // pnlToolbar
             // 
@@ -229,8 +229,8 @@
             this.toolTip.SetToolTip(this.btnGenerate, "Dan rapport");
             this.btnGenerate.UseVisualStyleBackColor = false;
             this.btnGenerate.Click += new System.EventHandler(this.OnGenerate);
-            this.btnGenerate.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this.btnGenerate.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            this.btnGenerate.MouseDown += new System.Windows.Forms.MouseEventHandler(OnMouseDown);
+            this.btnGenerate.MouseUp += new System.Windows.Forms.MouseEventHandler(OnMouseUp);
             // 
             // pnlToolbarLeft
             // 
