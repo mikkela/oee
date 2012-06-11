@@ -1,4 +1,6 @@
-﻿namespace Mikadocs.OEE.ManagementConsole
+﻿using System.Windows.Forms;
+
+namespace Mikadocs.OEE.ManagementConsole
 {
     partial class ManagementForm
     {
@@ -47,6 +49,7 @@
             this.productionStartDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productionEndDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productionViewEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.productionFilterUserControl1 = new Mikadocs.OEE.UserControls.ProductionFilterUserControl();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.pnlTopLeft = new System.Windows.Forms.Panel();
             this.pnlHeader = new System.Windows.Forms.Panel();
@@ -59,8 +62,8 @@
             this.pictureCellNotSelected = new System.Windows.Forms.PictureBox();
             this.pictureCellSelected = new System.Windows.Forms.PictureBox();
             this.pnlToolbarLeft = new System.Windows.Forms.Panel();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.bthMinimize = new System.Windows.Forms.Button();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.pnlBorder.SuspendLayout();
             this.pnlDisplay.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgProductions)).BeginInit();
@@ -149,6 +152,7 @@
             // pnlDisplay
             // 
             this.pnlDisplay.Controls.Add(this.dgProductions);
+            this.pnlDisplay.Controls.Add(this.productionFilterUserControl1);
             this.pnlDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDisplay.Location = new System.Drawing.Point(0, 70);
             this.pnlDisplay.Name = "pnlDisplay";
@@ -181,11 +185,11 @@
             this.dgProductions.DataSource = this.productionViewEntityBindingSource;
             this.dgProductions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgProductions.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgProductions.Location = new System.Drawing.Point(0, 0);
+            this.dgProductions.Location = new System.Drawing.Point(0, 64);
             this.dgProductions.MultiSelect = false;
             this.dgProductions.Name = "dgProductions";
             this.dgProductions.ReadOnly = true;
-            this.dgProductions.Size = new System.Drawing.Size(798, 335);
+            this.dgProductions.Size = new System.Drawing.Size(798, 271);
             this.dgProductions.TabIndex = 0;
             // 
             // machineDataGridViewTextBoxColumn
@@ -241,6 +245,14 @@
             // 
             this.productionViewEntityBindingSource.DataSource = typeof(Mikadocs.OEE.ManagementConsole.ProductionViewEntity);
             this.productionViewEntityBindingSource.Sort = "ProductionStart";
+            // 
+            // productionFilterUserControl1
+            // 
+            this.productionFilterUserControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.productionFilterUserControl1.Location = new System.Drawing.Point(0, 0);
+            this.productionFilterUserControl1.Name = "productionFilterUserControl1";
+            this.productionFilterUserControl1.Size = new System.Drawing.Size(798, 64);
+            this.productionFilterUserControl1.TabIndex = 20;
             // 
             // pnlTop
             // 
@@ -470,6 +482,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn producedItemsPerHourDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productionStartDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productionEndDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button bthMinimize;  
+        private System.Windows.Forms.Button bthMinimize;
+        private UserControls.ProductionFilterUserControl productionFilterUserControl1;  
     }
 }

@@ -19,10 +19,17 @@ namespace Mikadocs.OEE.ManagementConsole
             _repositoryFactory = new RepositoryFactory();
             InitializeComponent();
 
+            productionFilterUserControl1.Initialize(Settings.Default.Machines.Cast<string>().ToList(), GetTeams());
+            productionFilterUserControl1.FilterChanged += (s, o) => LoadData();
             dgProductions.AutoGenerateColumns = false;
             SetTexts();
 
             LoadData();
+        }
+
+        private IEnumerable<ProductionTeam> GetTeams()
+        {
+            return _repositoryFactory.CreateEntityRepository().LoadAll<ProductionTeam>();
         }
 
         #region Helpers
@@ -49,7 +56,7 @@ namespace Mikadocs.OEE.ManagementConsole
         {
             return
                 new ProductionViewEntityBindingList(
-                    _repositoryFactory.CreateEntityRepository().LoadAll<Production>().Select(p => new ProductionViewEntity(p)));
+                    _repositoryFactory.CreateProductionQueryRepository(true).LoadProductions(productionFilterUserControl1.Query).Select(p => new ProductionViewEntity(p)));
         }
 
         private void GenerateReport()
