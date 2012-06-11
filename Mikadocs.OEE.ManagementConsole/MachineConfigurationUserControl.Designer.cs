@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MachineConfigurationUserControl));
             this.plnProductionStops = new System.Windows.Forms.Panel();
             this.dgProductionStops = new System.Windows.Forms.DataGridView();
@@ -43,6 +43,7 @@
             this.pbAdd = new System.Windows.Forms.PictureBox();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.pbDelete = new System.Windows.Forms.PictureBox();
             this.plnProductionStops.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgProductionStops)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionStopViewEntityBindingSource)).BeginInit();
@@ -50,6 +51,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbUp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAdd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbDelete)).BeginInit();
             this.SuspendLayout();
             // 
             // plnProductionStops
@@ -68,14 +70,14 @@
             this.dgProductionStops.AllowUserToDeleteRows = false;
             this.dgProductionStops.AutoGenerateColumns = false;
             this.dgProductionStops.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgProductionStops.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgProductionStops.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgProductionStops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgProductionStops.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nameDataGridViewTextBoxColumn,
@@ -122,6 +124,7 @@
             this.plnPositionButtons.Controls.Add(this.pbUp, 0, 1);
             this.plnPositionButtons.Controls.Add(this.pbDown, 0, 2);
             this.plnPositionButtons.Controls.Add(this.pbAdd, 0, 0);
+            this.plnPositionButtons.Controls.Add(this.pbDelete, 0, 3);
             this.plnPositionButtons.Dock = System.Windows.Forms.DockStyle.Right;
             this.plnPositionButtons.Location = new System.Drawing.Point(584, 0);
             this.plnPositionButtons.Name = "plnPositionButtons";
@@ -186,6 +189,20 @@
             this.dataGridViewTextBoxColumn1.Visible = false;
             this.dataGridViewTextBoxColumn1.Width = 109;
             // 
+            // pbDelete
+            // 
+            this.pbDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pbDelete.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbDelete.BackgroundImage")));
+            this.pbDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbDelete.Location = new System.Drawing.Point(3, 365);
+            this.pbDelete.Name = "pbDelete";
+            this.pbDelete.Size = new System.Drawing.Size(79, 44);
+            this.pbDelete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbDelete.TabIndex = 3;
+            this.pbDelete.TabStop = false;
+            this.toolTip.SetToolTip(this.pbDelete, "Tilføj nyt produktionsstop");
+            this.pbDelete.Click += new System.EventHandler(this.OnDeleteExistingStop);
+            // 
             // MachineConfigurationUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -201,6 +218,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbUp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAdd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbDelete)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -219,5 +237,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.PictureBox pbAdd;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.PictureBox pbDelete;
     }
 }

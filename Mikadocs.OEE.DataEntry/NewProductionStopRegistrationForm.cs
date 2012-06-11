@@ -55,7 +55,13 @@ namespace Mikadocs.OEE.DataEntry
 
         private TimeSpan Duration
         {
-            get { return new TimeSpan(0, int.Parse(txtDuration.Text), 0); }
+            get
+            {
+                int minutes;
+                if (int.TryParse(txtDuration.Text, out minutes))
+                    return new TimeSpan(0, minutes, 0);
+                return TimeSpan.Zero;
+            }
         }
 
         private ProductionStop Stop
@@ -86,6 +92,8 @@ namespace Mikadocs.OEE.DataEntry
 
         private bool IsDurationWithinProductionTime(TimeSpan duration)
         {
+            if (duration == TimeSpan.Zero)
+                return false;
             return productionLeg.ProductionStopDuration.Add(duration) <= DateTime.Now.Subtract(productionLeg.ProductionStart);
         }
 

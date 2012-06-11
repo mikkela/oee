@@ -35,12 +35,16 @@ namespace Mikadocs.OEE.ManagementConsole
         {
             _machineConfiguration = LoadMachineConfiguration();
 
+            UpdateDataSource();
+        }
+
+        private void UpdateDataSource()
+        {
             var productionStops = (from p in _machineConfiguration.AvailableProductionStops
                                    where p != null
                                    select new ProductionStopViewEntity(p)).ToList();
 
             productionStopViewEntityBindingSource.DataSource = productionStops;
-            
         }
 
         private static MachineConfiguration LoadMachineConfiguration()
@@ -131,6 +135,19 @@ namespace Mikadocs.OEE.ManagementConsole
         private static void OnMouseUp(object sender, MouseEventArgs e)
         {
             GUIHelper.MinimizeButton(sender as Button);
+        }
+
+        private void OnDeleteExistingStop(object sender, EventArgs e)
+        {
+            if (dgProductionStops.CurrentRow != null)
+            {
+                _machineConfiguration.AvailableProductionStops =
+                    _machineConfiguration.AvailableProductionStops.Where(
+                        p => !p.Equals((dgProductionStops.CurrentRow.DataBoundItem as ProductionStopViewEntity).Entity));
+                
+                UpdateDataSource();
+                
+            }
         }
     }
 }
