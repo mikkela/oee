@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE.CostCalculator
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Mikadocs.OEE.CostCalculator.Setup", "Mikadocs.OEE.CostCalculator.Setup\Mikadocs.OEE.CostCalculator.Setup.vdproj", "{216DEF37-BF44-4AA1-B912-954C154D1678}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE.UserControls", "Mikadocs.OEE.UserControls\Mikadocs.OEE.UserControls.csproj", "{C9A10A59-4A14-44B3-B800-E71581161C06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,12 +63,16 @@ Global
 		{A0A22D19-105E-4BF0-AB54-084EFA2461B5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{216DEF37-BF44-4AA1-B912-954C154D1678}.Debug|Any CPU.ActiveCfg = Debug
 		{216DEF37-BF44-4AA1-B912-954C154D1678}.Release|Any CPU.ActiveCfg = Release
+		{C9A10A59-4A14-44B3-B800-E71581161C06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9A10A59-4A14-44B3-B800-E71581161C06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9A10A59-4A14-44B3-B800-E71581161C06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9A10A59-4A14-44B3-B800-E71581161C06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_UpdateAssemblyVersion = False
 		BuildVersion_UpdateFileVersion = False
+		BuildVersion_UpdateAssemblyVersion = False
 	EndGlobalSection
 EndGlobal

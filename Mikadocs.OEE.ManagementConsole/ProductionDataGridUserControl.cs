@@ -17,13 +17,10 @@ namespace Mikadocs.OEE.ManagementConsole
             SetTexts();
             productionStopRegistrationGridView.AutoGenerateColumns = false;
             _repositoryFactory = new RepositoryFactory();
+            productionFilterUserControl1.FilterChanged += OnFilterChanged;
 
-            cbMachine.DataSource = Settings.Default.Machines;
-            cbMachine.SelectedItem = null;
-
-            cbTeam.DataSource = GetTeams();
-            cbTeam.DisplayMember = "Name";
-            cbTeam.SelectedItem = null;
+            productionFilterUserControl1.Initialize(Settings.Default.Machines.Cast<string>().ToList(), GetTeams());
+            
 
             Load();
         }
@@ -219,7 +216,7 @@ namespace Mikadocs.OEE.ManagementConsole
 
         private ProductionViewEntityBindingList LoadProductions()
         {
-            _productions = _repositoryFactory.CreateProductionQueryRepository(false).LoadProductions(Query);
+            _productions = _repositoryFactory.CreateProductionQueryRepository(false).LoadProductions(productionFilterUserControl1.Query);
 
             return new ProductionViewEntityBindingList(_productions.Select(p => new ProductionViewEntity(p)));
         }
@@ -244,28 +241,7 @@ namespace Mikadocs.OEE.ManagementConsole
             _repositoryFactory.CreateEntityRepository().Delete(p);            
         }          
   
-        private ProductionQuery Query
-        {
-            get
-            {
-                var result = new ProductionQuery().AddDateRange(dtPeriodStart.Value, dtPeriodEnd.Value);
-
-                if (!string.IsNullOrEmpty(txtProduct.Text))
-                    result = result.AddProduct(new ProductNumber(txtProduct.Text));
-
-                if (!string.IsNullOrEmpty(txtOrder.Text))
-                    result = result.AddOrder(new OrderNumber(txtOrder.Text));
-
-                if (cbMachine.SelectedItem != null)
-                    result = result.AddMachine(cbMachine.SelectedItem.ToString());
-                if (cbTeam.SelectedItem != null)
-                    result = result.AddTeam((ProductionTeam)cbTeam.SelectedItem);
-
-                return result;
-            }
-        }
-
-        private void OnValueChanged(object sender, EventArgs e)
+        private void OnFilterChanged(object sender, EventArgs e)
         {
             Load();
         }

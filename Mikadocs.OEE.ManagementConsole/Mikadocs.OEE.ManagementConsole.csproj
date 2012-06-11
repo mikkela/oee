@@ -235,6 +235,10 @@
       <Project>{55D362C3-9048-4997-9ABD-58E84B6F4F3A}</Project>
       <Name>Mikadocs.OEE.Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mikadocs.OEE.UserControls\Mikadocs.OEE.UserControls.csproj">
+      <Project>{C9A10A59-4A14-44B3-B800-E71581161C06}</Project>
+      <Name>Mikadocs.OEE.UserControls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mikadocs.OEE\Mikadocs.OEE.csproj">
       <Project>{5A737B92-FAC2-455D-99B9-E45D2FB821FE}</Project>
       <Name>Mikadocs.OEE</Name>
@@ -267,7 +271,7 @@
   -->
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="YearDayOfYear_Timestamp" />
+      <UserProperties BuildVersion_BuildVersioningStyle="YearDayOfYear_Timestamp" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

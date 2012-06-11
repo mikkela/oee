@@ -70,7 +70,6 @@
     <Compile Include="EntityRepository.cs" />
     <Compile Include="IEntityRepository.cs" />
     <Compile Include="IProductionQueryRepository.cs" />
-    <Compile Include="NewRepository.cs" />
     <Compile Include="ProductionQuery.cs" />
     <Compile Include="ProductionQueryRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -133,7 +132,7 @@
   -->
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="YearDayOfYear_Timestamp" />
+      <UserProperties BuildVersion_BuildVersioningStyle="YearDayOfYear_Timestamp" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
