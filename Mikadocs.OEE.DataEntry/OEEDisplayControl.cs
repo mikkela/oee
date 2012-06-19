@@ -223,12 +223,12 @@ namespace Mikadocs.OEE.DataEntry
             {
                 if (stop == null)
                     continue;
-                xValues.Add(stop.Name);
+                xValues.Add(stop.Name.Substring(0, Math.Min(stop.Name.Length, 12)));
                 series1Values.Add(validatedMinutes[stop]);
                 series2Values.Add(stopMinutes[stop]);
                 series3Values.Add(stopInstances[stop]);                
             }
-
+            
             chart.Series[0].Points.DataBindXY(xValues, series1Values);
             chart.Series[1].Points.DataBindXY(xValues, series2Values);
             chart.Series[2].Points.DataBindXY(xValues, series3Values);

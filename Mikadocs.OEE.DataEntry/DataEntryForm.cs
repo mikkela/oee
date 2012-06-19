@@ -34,6 +34,7 @@ namespace Mikadocs.OEE.DataEntry
             UpdateButtons();
 
             _printDocument.DefaultPageSettings.Landscape = true;
+            _printDocument.DefaultPageSettings.Margins = new Margins(25, 25, 25, 25);
             _printDocument.PrintPage += OnPrintDocument;            
         }
 

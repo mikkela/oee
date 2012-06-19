@@ -228,7 +228,7 @@ namespace Mikadocs.OEE.ManagementConsole
             {
                 if (stop == null)
                     continue;
-                xValues.Add(stop.Name);
+                xValues.Add(stop.Name.Substring(0, Math.Min(stop.Name.Length, 12)));
                 series1Values.Add(stopValidated[stop]);
                 series2Values.Add(stopMinutes[stop]);
                 series3Values.Add(stopInstances[stop]);

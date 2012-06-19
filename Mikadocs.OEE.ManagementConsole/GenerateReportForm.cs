@@ -18,6 +18,7 @@ namespace Mikadocs.OEE.ManagementConsole
 
             _printDocument.DefaultPageSettings.Landscape = true;
             _printDocument.PrintPage += OnPrintDocument;
+            _printDocument.DefaultPageSettings.Margins = new Margins(25, 25, 25, 25);
             productionFilterUserControl1.Initialize(Settings.Default.Machines.Cast<string>().ToList(), GetTeams());
             
             SetTexts();            
