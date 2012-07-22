@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using Mikadocs.OEE.Repository;
+using Mikadocs.OEE.Security;
 
 namespace Mikadocs.OEE.ManagementConsole
 {
@@ -18,6 +19,7 @@ namespace Mikadocs.OEE.ManagementConsole
             InitializeComponent();
 
             this.txtHeader.Text = Strings.Header;
+            btnSave.Enabled = SecurityManager.CanEditManagementConsole;
         }
 
         private void OnSave(object sender, EventArgs e)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 
 using Mikadocs.OEE.Repository;
+using Mikadocs.OEE.Security;
 
 namespace Mikadocs.OEE.ManagementConsole
 {
@@ -20,6 +21,10 @@ namespace Mikadocs.OEE.ManagementConsole
             dgProductionStops.Columns[1].HeaderText = Strings.Planned;
             if (!DesignMode)
                 Load();
+            pbAdd.Enabled = SecurityManager.CanEditManagementConsole;
+            pbDelete.Enabled = SecurityManager.CanEditManagementConsole;
+            pbDown.Enabled = SecurityManager.CanEditManagementConsole;
+            pbUp.Enabled = SecurityManager.CanEditManagementConsole;
         }
 
         public void Save()

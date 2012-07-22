@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Mikadocs.OEE.Security;
 
 namespace Mikadocs.OEE.ManagementConsole
 {
@@ -15,6 +16,9 @@ namespace Mikadocs.OEE.ManagementConsole
         {
             InitializeComponent();
 
+            this.btnAdd.Enabled = SecurityManager.CanEditManagementConsole;
+            this.btnDelete.Enabled = SecurityManager.CanEditManagementConsole;
+            this.btnSave.Enabled = SecurityManager.CanEditManagementConsole;
             this.txtHeader.Text = Strings.Header;
         }
 
