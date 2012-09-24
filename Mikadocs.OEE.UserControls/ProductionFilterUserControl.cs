@@ -45,6 +45,8 @@ namespace Mikadocs.OEE.UserControls
                 if (cbTeam.SelectedItem != null)
                     result = result.AddTeam((ProductionTeam)cbTeam.SelectedItem);
 
+                result = result.AddMaximumLimit(int.Parse(txtMaximumLimit.Text));
+
                 return result;
             }
         }
@@ -53,6 +55,11 @@ namespace Mikadocs.OEE.UserControls
         {
             if (FilterChanged != null)
                 FilterChanged(this, EventArgs.Empty);
+        }
+
+        private void txtMaximumLimit_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar));
         }
 
     }

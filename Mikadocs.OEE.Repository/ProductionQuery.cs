@@ -11,10 +11,16 @@ namespace Mikadocs.OEE.Repository
         private OrderNumber order;
         private List<string> machines = new List<string>();
         private ProductNumber product;
+        private int maximumLimit = 100;
 
         public ProductionQuery()
         {
 
+        }
+
+        public int MaximumLimit
+        {
+            get { return maximumLimit; }
         }
 
         public Pair<DateTime, DateTime> DateRange
@@ -83,6 +89,15 @@ namespace Mikadocs.OEE.Repository
             ProductionQuery result = (ProductionQuery) this.MemberwiseClone();
 
             result.teams.Add(team);
+
+            return result;
+        }
+
+        public ProductionQuery AddMaximumLimit(int maximumLimit)
+        {
+            ProductionQuery result = (ProductionQuery)this.MemberwiseClone();
+
+            result.maximumLimit = maximumLimit;
 
             return result;
         }

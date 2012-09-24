@@ -43,6 +43,8 @@ namespace Mikadocs.OEE.Repository
                 if (query.Product != null)
                     criteria.Add(Restrictions.Eq("Product", query.Product));
 
+                criteria.SetMaxResults(query.MaximumLimit);
+
                 foreach (var p in criteria.List<Production>())
                 {
                     var production = p;
