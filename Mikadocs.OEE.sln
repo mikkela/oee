@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE.Security", "Mi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE.Security.SecurityManagerConsole", "Mikadocs.OEE.Security.SecurityManagerConsole\Mikadocs.OEE.Security.SecurityManagerConsole.csproj", "{EE5FC154-6FA8-42D9-ADC2-608668F73F91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProduktionsstopOversigt", "ProduktionsstopOversigt\ProduktionsstopOversigt.csproj", "{7CF57A60-F206-4767-BC2D-1AC36852B834}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -161,6 +163,16 @@ Global
 		{EE5FC154-6FA8-42D9-ADC2-608668F73F91}.Release|Mixed Platforms.Build.0 = Release|x86
 		{EE5FC154-6FA8-42D9-ADC2-608668F73F91}.Release|x86.ActiveCfg = Release|x86
 		{EE5FC154-6FA8-42D9-ADC2-608668F73F91}.Release|x86.Build.0 = Release|x86
+		{7CF57A60-F206-4767-BC2D-1AC36852B834}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CF57A60-F206-4767-BC2D-1AC36852B834}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CF57A60-F206-4767-BC2D-1AC36852B834}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7CF57A60-F206-4767-BC2D-1AC36852B834}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7CF57A60-F206-4767-BC2D-1AC36852B834}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7CF57A60-F206-4767-BC2D-1AC36852B834}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CF57A60-F206-4767-BC2D-1AC36852B834}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CF57A60-F206-4767-BC2D-1AC36852B834}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7CF57A60-F206-4767-BC2D-1AC36852B834}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7CF57A60-F206-4767-BC2D-1AC36852B834}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
