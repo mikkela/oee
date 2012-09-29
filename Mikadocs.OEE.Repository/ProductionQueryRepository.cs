@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using NHibernate;
 using NHibernate.Criterion;
@@ -43,7 +45,7 @@ namespace Mikadocs.OEE.Repository
                 if (query.Product != null)
                     criteria.Add(Restrictions.Eq("Product", query.Product));
 
-                criteria.SetMaxResults(query.MaximumLimit);
+                criteria.Add(Restrictions.In("id", GetProductionIds(query)));
 
                 foreach (var p in criteria.List<Production>())
                 {
@@ -134,6 +136,44 @@ namespace Mikadocs.OEE.Repository
             }
 
             return production;
+        }
+
+        private const string connectionString =
+            //@"Data Source=MIKKEL-PC\SQLSERVER;Initial Catalog=oee;Integrated Security=True";
+            @"Data Source=Alpha\SqlExpress;Initial Catalog=oee;Initial Catalog=oee;User Id=oee;Password=oee";
+
+        private const string queryString =
+            "SELECT     Production.ID " +
+             "FROM      Production INNER JOIN ProductionShift ON Production.ID = ProductionShift.ProductionId "+
+             "WHERE     ProductionShift.ProductionDate >= '{0}' AND ProductionShift.ProductionDate <= '{1}'";
+
+        private static List<long> GetProductionIds(ProductionQuery query)
+        {
+            var result = new List<long>();
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                var q = string.Format(queryString, query.DateRange.First.ToString("yyyy-MM-dd"), query.DateRange.Second.ToString("yyyy-MM-dd"));
+
+
+
+
+                using (var command = new SqlCommand(q, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            result.Add(long.Parse(reader[0].ToString()));
+
+                        }
+                    }
+                }
+            }
+
+            return result;
+
         }
         
     }
