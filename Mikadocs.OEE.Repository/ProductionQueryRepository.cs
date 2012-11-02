@@ -28,58 +28,77 @@ namespace Mikadocs.OEE.Repository
 
             try
             {
-                ICriteria criteria = _session.CreateCriteria(typeof(Production));
-
-                var machines = new List<string>(query.Machines);
-                var teams = new List<ProductionTeam>(query.Teams);
-
-
-                if (machines.Count > 0)
+                var ids = GetProductionIds(query);
+                int index = 0;
+                bool cont = true;
+                while(cont)
                 {
-                    criteria.Add(Restrictions.In("Machine", machines));
-                }
-
-                if (query.Order != null)
-                    criteria.Add(Restrictions.Eq("Order", query.Order));
-
-                if (query.Product != null)
-                    criteria.Add(Restrictions.Eq("Product", query.Product));
-
-                criteria.Add(Restrictions.In("id", GetProductionIds(query)));
-
-                foreach (var p in criteria.List<Production>())
-                {
-                    var production = p;
-
-                    if (query.DateRange != null)
+                    var max = 2000;
+                    if (ids.Count - index <= max)
                     {
-                        if (production.ProductionEnd.Date < query.DateRange.First.Date ||
-                            query.DateRange.Second.Date < production.ProductionStart.Date)
-                            continue;
-
-
-                        var shifts = production.Shifts.Where(shift => query.DateRange.First <= shift.ProductionStart.Date && shift.ProductionStart.Date <= query.DateRange.Second).ToList();
-
-                        if (shifts.Count == 0)
-                            continue;
-                        if (_doDuplicatew)
-                            production = Duplicate(production, shifts);
-                        
+                        max = ids.Count - index;
+                        cont = false;
                     }
 
-                    if (teams.Count > 0)
+                    ICriteria criteria = _session.CreateCriteria(typeof (Production));
+
+                    var machines = new List<string>(query.Machines);
+                    var teams = new List<ProductionTeam>(query.Teams);
+
+
+                    if (machines.Count > 0)
                     {
-                        List<ProductionShift> shifts =
-                            new List<ProductionShift>(production.Shifts).FindAll(
-                                shift => Enumerable.Contains(teams, shift.Team));
-
-                        if (shifts.Count == 0)
-                            continue;
-
-                        if (_doDuplicatew)
-                            production = Duplicate(production, shifts);
+                        criteria.Add(Restrictions.In("Machine", machines));
                     }
-                    result.Add(production);
+
+                    if (query.Order != null)
+                        criteria.Add(Restrictions.Eq("Order", query.Order));
+
+                    if (query.Product != null)
+                        criteria.Add(Restrictions.Eq("Product", query.Product));
+
+                    criteria.Add(Restrictions.In("id", ids.GetRange(index, max)));
+
+                    foreach (var p in criteria.List<Production>())
+                    {
+                        var production = p;
+
+                        if (query.DateRange != null)
+                        {
+                            if (production.ProductionEnd.Date < query.DateRange.First.Date ||
+                                query.DateRange.Second.Date < production.ProductionStart.Date)
+                                continue;
+
+
+                            var shifts =
+                                production.Shifts.Where(
+                                    shift =>
+                                    query.DateRange.First <= shift.ProductionStart.Date &&
+                                    shift.ProductionStart.Date <= query.DateRange.Second).ToList();
+
+                            if (shifts.Count == 0)
+                                continue;
+                            if (_doDuplicatew)
+                                production = Duplicate(production, shifts);
+
+                        }
+
+                        if (teams.Count > 0)
+                        {
+                            List<ProductionShift> shifts =
+                                new List<ProductionShift>(production.Shifts).FindAll(
+                                    shift => Enumerable.Contains(teams, shift.Team));
+
+                            if (shifts.Count == 0)
+                                continue;
+
+                            if (_doDuplicatew)
+                                production = Duplicate(production, shifts);
+                        }
+                        result.Add(production);
+                    }
+
+                    index += max;
                 }
             }
             catch (HibernateException e)
