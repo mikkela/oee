@@ -16,10 +16,12 @@
   &lt;string&gt;VK 40&lt;/string&gt;
   &lt;string&gt;VK 50&lt;/string&gt;
   &lt;string&gt;VK 125&lt;/string&gt;
+  &lt;string&gt;VK 125F&lt;/string&gt;
   &lt;string&gt;VK 200A&lt;/string&gt;
   &lt;string&gt;2001&lt;/string&gt;
   &lt;string&gt;VK 315&lt;/string&gt;
   &lt;string&gt;CNC&lt;/string&gt;
+  &lt;string&gt;CNC 2&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
   </Settings>
