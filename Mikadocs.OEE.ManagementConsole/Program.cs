@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Mikadocs.OEE.Security;
 
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.cfg.xml", ConfigFileExtension = "xml", Watch = true)]
 

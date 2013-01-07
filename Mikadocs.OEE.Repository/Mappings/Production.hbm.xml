@@ -6,7 +6,7 @@
     </id>
     <version name="Version" access="nosetter.camelcase" />
 
-    <property name="Machine" />
+    <property name="Machine" column="MachineName"/>
     
     <component name="Order">
       <property name="Number" access="nosetter.camelcase" column="OrderNumber" unique="true" />

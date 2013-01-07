@@ -69,6 +69,7 @@ namespace Mikadocs.OEE.DataEntry
 
         private void OnLoad(object sender, EventArgs e)
         {
+            CheckLicense();
             StartDataEntry();
         }
 
@@ -350,5 +351,33 @@ namespace Mikadocs.OEE.DataEntry
             }
         }
         #endregion                                
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            CheckLicense();
+        }
+
+        private void CheckLicense()
+        {
+            var licenseManager = new Security.LicenseManager();
+            licenseManager.RetreiveLicense(p => this.BeginInvoke(new HandleLicenseDelegate(HandleLicense), p));
+        }
+
+        private delegate void HandleLicenseDelegate(Security.License license);
+        private void HandleLicense(Security.License license)
+        {
+            if (license.ExpireAt < DateTime.Now)
+            {
+                Close();
+                return;
+            }
+
+            if (license.Warn)
+            {
+                MessageBox.Show(this,
+                                "Denne applikation vil ophøre med at virke fra: " + license.ExpireAt.ToShortDateString());
+            }
+
+        }
     }
 }

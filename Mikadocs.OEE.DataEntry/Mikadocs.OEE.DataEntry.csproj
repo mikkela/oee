@@ -220,6 +220,10 @@
       <Project>{55D362C3-9048-4997-9ABD-58E84B6F4F3A}</Project>
       <Name>Mikadocs.OEE.Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mikadocs.OEE.Security\Mikadocs.OEE.Security.csproj">
+      <Project>{E265DE7C-7F16-43E1-8A90-455F13AFCFC6}</Project>
+      <Name>Mikadocs.OEE.Security</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mikadocs.OEE\Mikadocs.OEE.csproj">
       <Project>{5A737B92-FAC2-455D-99B9-E45D2FB821FE}</Project>
       <Name>Mikadocs.OEE</Name>
@@ -228,6 +232,7 @@
   <ItemGroup>
     <Content Include="hibernate.cfg.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="log4net.cfg.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -264,7 +269,7 @@
   -->
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="YearDayOfYear_Timestamp" />
+      <UserProperties BuildVersion_BuildVersioningStyle="YearDayOfYear_Timestamp" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

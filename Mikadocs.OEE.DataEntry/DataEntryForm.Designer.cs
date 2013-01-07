@@ -36,6 +36,7 @@
             this.btnPrint = new System.Windows.Forms.Button();
             this.pnlBorder = new System.Windows.Forms.Panel();
             this.pnlDisplay = new System.Windows.Forms.Panel();
+            this.ucDisplay = new Mikadocs.OEE.DataEntry.OEEDisplayControl();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.pnlTopLeft = new System.Windows.Forms.Panel();
             this.pnlHeader = new System.Windows.Forms.Panel();
@@ -49,7 +50,7 @@
             this.pictureCellSelected = new System.Windows.Forms.PictureBox();
             this.pnlToolbarLeft = new System.Windows.Forms.Panel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.ucDisplay = new Mikadocs.OEE.DataEntry.OEEDisplayControl();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pnlBorder.SuspendLayout();
             this.pnlDisplay.SuspendLayout();
             this.pnlTop.SuspendLayout();
@@ -162,6 +163,15 @@
             this.pnlDisplay.Name = "pnlDisplay";
             this.pnlDisplay.Size = new System.Drawing.Size(798, 335);
             this.pnlDisplay.TabIndex = 19;
+            // 
+            // ucDisplay
+            // 
+            this.ucDisplay.BackColor = System.Drawing.Color.Transparent;
+            this.ucDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucDisplay.Location = new System.Drawing.Point(0, 0);
+            this.ucDisplay.Name = "ucDisplay";
+            this.ucDisplay.Size = new System.Drawing.Size(798, 335);
+            this.ucDisplay.TabIndex = 0;
             // 
             // pnlTop
             // 
@@ -311,14 +321,11 @@
             this.pnlToolbarLeft.Size = new System.Drawing.Size(211, 75);
             this.pnlToolbarLeft.TabIndex = 11;
             // 
-            // ucDisplay
+            // timer1
             // 
-            this.ucDisplay.BackColor = System.Drawing.Color.Transparent;
-            this.ucDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucDisplay.Location = new System.Drawing.Point(0, 0);
-            this.ucDisplay.Name = "ucDisplay";
-            this.ucDisplay.Size = new System.Drawing.Size(798, 335);
-            this.ucDisplay.TabIndex = 0;
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 600000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // DataEntryForm
             // 
@@ -373,6 +380,7 @@
         private OEEDisplayControl ucDisplay;
         private System.Windows.Forms.TextBox txtCopyright;
         private System.Windows.Forms.Button bthMinimize;
-        private System.Windows.Forms.ToolTip toolTip;  
+        private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Timer timer1;  
     }
 }

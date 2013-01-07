@@ -158,8 +158,8 @@ namespace Mikadocs.OEE.Repository
         }
 
         private const string connectionString =
-            @"Data Source=MIKKEL-PC\SQLSERVER;Initial Catalog=oee;Integrated Security=True";
-            //@"Data Source=Alpha\SqlExpress;Initial Catalog=oee;Initial Catalog=oee;User Id=oee;Password=oee";
+            //@"Data Source=MIKKEL-PC\SQLSERVER;Initial Catalog=oee;Integrated Security=True";
+            @"Data Source=Alpha\SqlExpress;Initial Catalog=oee;Initial Catalog=oee;User Id=oee;Password=oee";
 
         private const string queryString =
             "SELECT     Production.ID " +

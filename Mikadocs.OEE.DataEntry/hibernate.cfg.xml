@@ -6,7 +6,7 @@
     
     <!--<property name ="connection.connection_string">Data Source=MIKKEL-PC\SQLSERVER;Initial Catalog=oee;Integrated Security=True</property>-->    
     
-      <!--<property name ="connection.connection_string">Data Source=Alpha\SqlExpress;Initial Catalog=oee;Initial Catalog=oee;User Id=oee;Password=oee</property>-->   
+    <property name ="connection.connection_string">Data Source=Alpha\SqlExpress;Initial Catalog=oee;Initial Catalog=oee;User Id=oee;Password=oee</property>   
     
     <property name="dialect">NHibernate.Dialect.MsSql2005Dialect</property>
    
