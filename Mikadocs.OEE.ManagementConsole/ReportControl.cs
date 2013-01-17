@@ -71,7 +71,7 @@ namespace Mikadocs.OEE.ManagementConsole
             DisplayProducedItems(productions.Sum(p => p.ProducedItems));
             DisplayDiscardedItems(productions.Sum(p => p.DiscardedItems));
 
-            IEnumerable<FactorCalculator> calculators = productions.Select(p => new FactorCalculator(p));
+            IEnumerable<FactorCalculator> calculators = productions.Select(p => new FactorCalculator(p, IsPlanned));
 
             double availability = FactorCalculator.ComputedWeightedAverage(calculators, c => c.Availability);
             double performance = FactorCalculator.ComputedWeightedAverage(calculators, c => c.Performance);
@@ -83,6 +83,13 @@ namespace Mikadocs.OEE.ManagementConsole
                            availability*performance*quality);
 
             DisplayStopRegistrations(productions, allProductionStops);
+        }
+
+        private bool IsPlanned(ProductionStop stop)
+        {
+            var s = ProductionStopRepository.ProductionStops.FirstOrDefault(p => p.Id == stop.Id);
+
+            return s != null && s.Planned;
         }
 
         internal void PrintTo(Graphics g, Rectangle bounds)
@@ -213,6 +220,12 @@ namespace Mikadocs.OEE.ManagementConsole
             {
                 foreach (ProductionStopRegistration registration in list)
                 {
+                    if (!stopValidated.ContainsKey(registration.Stop))
+                        stopValidated.Add(registration.Stop, 0);
+                    if (!stopMinutes.ContainsKey(registration.Stop))
+                        stopMinutes.Add(registration.Stop, 0);
+                    if (!stopInstances.ContainsKey(registration.Stop))
+                        stopInstances.Add(registration.Stop, 0);
                     stopValidated[registration.Stop] = (registration.Stop.Name.Equals("Omstilling") ? productions.Sum(p => (long)p.ValidatedStartTime.TotalMinutes) : 0);                
                     stopMinutes[registration.Stop] = stopMinutes[registration.Stop] + (long)registration.Duration.TotalMinutes;
                     stopInstances[registration.Stop] = stopInstances[registration.Stop] + 1;

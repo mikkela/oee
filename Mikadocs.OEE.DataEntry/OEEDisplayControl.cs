@@ -43,7 +43,7 @@ namespace Mikadocs.OEE.DataEntry
             DisplayProductionTime(shift.Duration, production.Duration);
             DisplayProducedItems(shift.ProducedItems, production.ProducedItems, production.ProducedItemsPerHour);
             DisplayDiscardedItems(shift.DiscardedItems, production.DiscardedItems);
-            DisplayFactors(new FactorCalculator(shift), new FactorCalculator(production));
+            DisplayFactors(new FactorCalculator(shift, p => p.Planned), new FactorCalculator(production, p => p.Planned));
 
             DisplayStopRegistrationsOnChart(chartShift, shift.ProductionStopRegistrations, allStops, production.ValidatedStartTime);
             DisplayStopRegistrationsOnChart(chartProduction, production.ProductionStopRegistrations, allStops, production.ValidatedStartTime);

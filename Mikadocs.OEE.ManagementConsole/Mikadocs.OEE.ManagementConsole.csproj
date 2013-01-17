@@ -120,6 +120,7 @@
     <Compile Include="ProductionShiftViewEntityBindingList.cs" />
     <Compile Include="ProductionStopRegistrationViewEntity.cs" />
     <Compile Include="ProductionStopRegistrationViewEntityBindingList.cs" />
+    <Compile Include="ProductionStopRepository.cs" />
     <Compile Include="ProductionStopViewEntity.cs" />
     <Compile Include="ProductionStopViewEntityBindingList.cs" />
     <Compile Include="ProductionViewEntity.cs" />
@@ -278,7 +279,7 @@
   -->
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="YearDayOfYear_Timestamp" />
+      <UserProperties BuildVersion_BuildVersioningStyle="YearDayOfYear_Timestamp" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

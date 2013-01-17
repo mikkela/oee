@@ -7,10 +7,12 @@ namespace Mikadocs.OEE
     public class FactorCalculator
     {
         private IProduction production;
+        private readonly Func<ProductionStop, bool> _isStopPlanned;
 
-        public FactorCalculator(IProduction production)
+        public FactorCalculator(IProduction production, Func<ProductionStop, bool> isStopPlanned)
         {
             this.production = production;
+            _isStopPlanned = isStopPlanned;
         }
 
         public double Availability
@@ -80,7 +82,7 @@ namespace Mikadocs.OEE
 
                 foreach (ProductionStopRegistration registration in production.ProductionStopRegistrations)
                 {
-                    if (registration.Stop.Planned)
+                    if (_isStopPlanned(registration.Stop))
                         plannedProductionTime = plannedProductionTime - registration.Duration;
                 }
 
@@ -101,7 +103,7 @@ namespace Mikadocs.OEE
 
                 foreach (ProductionStopRegistration registration in production.ProductionStopRegistrations)
                 {
-                    if (!registration.Stop.Planned)
+                    if (!_isStopPlanned(registration.Stop))
                         operatingTime = operatingTime - registration.Duration;
                 }
 

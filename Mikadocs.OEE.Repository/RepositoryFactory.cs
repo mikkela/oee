@@ -22,6 +22,7 @@ namespace Mikadocs.OEE.Repository
             return new ProductionQueryRepository(_session, doDuplicate);
         }
 
+
         #region IDisposable Members
 
         public void Dispose()

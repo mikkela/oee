@@ -45,7 +45,7 @@ namespace Mikadocs.OEE.ManagementConsole
 
         private void UpdateDataSource()
         {
-            var productionStops = (from p in _machineConfiguration.AvailableProductionStops
+            var productionStops = (from p in ProductionStopRepository.ProductionStops
                                    where p != null
                                    select new ProductionStopViewEntity(p)).ToList();
 
@@ -68,6 +68,7 @@ namespace Mikadocs.OEE.ManagementConsole
                 var repository = factory.CreateEntityRepository();
                 repository.SaveAll(_machineConfiguration.AvailableProductionStops);
                 repository.Save(_machineConfiguration);
+                ProductionStopRepository.ProductionStops = _machineConfiguration.AvailableProductionStops;
             }
         }
 
@@ -120,10 +121,11 @@ namespace Mikadocs.OEE.ManagementConsole
                         repository.Save(newStop);
                         foreach (var machine in repository.LoadAll<MachineConfiguration>())
                         {
-                            var stops = new List<ProductionStop>(machine.AvailableProductionStops) {newStop};
+                            var stops = new List<ProductionStop>(machine.AvailableProductionStops) {newStop};                            
                             machine.AvailableProductionStops = stops;
 
                             repository.Save(machine);
+                            ProductionStopRepository.ProductionStops = stops;
                         }
                         
                         Load();

@@ -5,6 +5,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		Mikadocs.OEE.vsmdi = Mikadocs.OEE.vsmdi
 		setup.sql = setup.sql
+		Sql\update 07012013.sql = Sql\update 07012013.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikadocs.OEE", "Mikadocs.OEE\Mikadocs.OEE.csproj", "{5A737B92-FAC2-455D-99B9-E45D2FB821FE}"
@@ -178,7 +179,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_UpdateAssemblyVersion = False
 		BuildVersion_UpdateFileVersion = False
+		BuildVersion_UpdateAssemblyVersion = False
 	EndGlobalSection
 EndGlobal

@@ -59,10 +59,7 @@ namespace Mikadocs.OEE.ManagementConsole
 
         private static IEnumerable<ProductionStop> GetProductionStops()
         {
-            using (var factory = new RepositoryFactory())
-            {
-                return factory.CreateEntityRepository().LoadAll<ProductionStop>();
-            }
+            return ProductionStopRepository.ProductionStops;
         }
 
         private static IEnumerable<ProductionTeam> GetTeams()

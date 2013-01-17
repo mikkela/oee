@@ -7,7 +7,6 @@
     <version name="Version" access="nosetter.camelcase" />
 
     <property name="Name" unique="true"/>
-    <property name="Planned" />
     <property name="GlobalId" access="nosetter.camelcase" />
   </class>
 </hibernate-mapping>

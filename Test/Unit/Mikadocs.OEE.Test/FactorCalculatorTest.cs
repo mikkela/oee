@@ -136,7 +136,7 @@ namespace Mikadocs.OEE.Test
         [TestMethod]
         public void AvailabilityWithNoProductionStops()
         {
-            FactorCalculator calculator = new FactorCalculator(new LocalProduction(new TimeSpan(5, 30, 0), new ProductionStopRegistration[] {}));
+            FactorCalculator calculator = new FactorCalculator(new LocalProduction(new TimeSpan(5, 30, 0), new ProductionStopRegistration[] { }), p => p.Planned);
 
             Assert.AreEqual<double>(1.0, calculator.Availability);
             Assert.AreEqual<TimeSpan>(new TimeSpan(5, 30, 0), calculator.Duration);
@@ -148,7 +148,7 @@ namespace Mikadocs.OEE.Test
             FactorCalculator calculator = new FactorCalculator(new LocalProduction(new TimeSpan(5, 0, 0), new ProductionStopRegistration[] 
             { 
                 new ProductionStopRegistration(new ProductionStop("Test"), new TimeSpan(1, 0, 0)) 
-            }));
+            }), p => p.Planned);
 
             Assert.AreEqual<double>(0.8, calculator.Availability);
             Assert.AreEqual<TimeSpan>(new TimeSpan(5, 0, 0), calculator.Duration);
@@ -160,7 +160,7 @@ namespace Mikadocs.OEE.Test
             FactorCalculator calculator = new FactorCalculator(new LocalProduction(new TimeSpan(5, 0, 0), new ProductionStopRegistration[] 
             { 
                 new ProductionStopRegistration(new ProductionStop("Test", true), new TimeSpan(1, 0, 0)) 
-            }));
+            }), p => p.Planned);
 
             Assert.AreEqual<double>(1.0, calculator.Availability);
             Assert.AreEqual<TimeSpan>(new TimeSpan(5, 0, 0), calculator.Duration);
@@ -175,7 +175,7 @@ namespace Mikadocs.OEE.Test
                 new ProductionStopRegistration(new ProductionStop("Test 2", true), new TimeSpan(0, 55, 0)),
                 new ProductionStopRegistration(new ProductionStop("Test 3", false), new TimeSpan(1, 0, 0)),
                 new ProductionStopRegistration(new ProductionStop("Test 4", true), new TimeSpan(0, 45, 0))
-            }));
+            }), p => p.Planned);
 
             Assert.AreEqual<double>(0.8, calculator.Availability);
             Assert.AreEqual<TimeSpan>(new TimeSpan(10, 0, 0), calculator.Duration);
@@ -190,7 +190,7 @@ namespace Mikadocs.OEE.Test
                 new ProductionStopRegistration(new ProductionStop("Test 2", false), new TimeSpan(1, 0, 0)),
                 new ProductionStopRegistration(new ProductionStop("Test 3", false), new TimeSpan(0, 30, 0)),
                 new ProductionStopRegistration(new ProductionStop("Test 4", false), new TimeSpan(4, 0, 0))
-            }));
+            }), p => p.Planned);
 
             Assert.AreEqual<double>(0, calculator.Availability);
             Assert.AreEqual<TimeSpan>(new TimeSpan(10, 0, 0), calculator.Duration);
@@ -199,7 +199,7 @@ namespace Mikadocs.OEE.Test
         [TestMethod]
         public void PerformanceWithFullRateAndNoStops()
         {
-            FactorCalculator calculator = new FactorCalculator(new LocalProduction(new TimeSpan(5, 30, 0), new ProductionStopRegistration[] { }, 3300, 10));
+            FactorCalculator calculator = new FactorCalculator(new LocalProduction(new TimeSpan(5, 30, 0), new ProductionStopRegistration[] { }, 3300, 10), p => p.Planned);
 
             Assert.AreEqual<double>(1.0, calculator.Performance);
             Assert.AreEqual<TimeSpan>(new TimeSpan(5, 30, 0), calculator.Duration);
@@ -208,7 +208,7 @@ namespace Mikadocs.OEE.Test
         [TestMethod]
         public void PerformanceNotWithFullRateAndNoStops()
         {
-            FactorCalculator calculator = new FactorCalculator(new LocalProduction(new TimeSpan(5, 30, 0), new ProductionStopRegistration[] { }, 2640, 10));
+            FactorCalculator calculator = new FactorCalculator(new LocalProduction(new TimeSpan(5, 30, 0), new ProductionStopRegistration[] { }, 2640, 10), p => p.Planned);
 
             Assert.AreEqual<double>(0.8, calculator.Performance);
             Assert.AreEqual<TimeSpan>(new TimeSpan(5, 30, 0), calculator.Duration);
@@ -223,7 +223,7 @@ namespace Mikadocs.OEE.Test
                 new ProductionStopRegistration(new ProductionStop("Test 2", true), new TimeSpan(1, 0, 0)),
                 new ProductionStopRegistration(new ProductionStop("Test 3", false), new TimeSpan(0, 15, 0)),
                 new ProductionStopRegistration(new ProductionStop("Test 4", true), new TimeSpan(0, 5, 0))
-            }, 2200, 10));
+            }, 2200, 10), p => p.Planned);
 
             Assert.AreEqual<double>(1, calculator.Performance);
             Assert.AreEqual<TimeSpan>(new TimeSpan(5, 30, 0), calculator.Duration);
@@ -238,7 +238,7 @@ namespace Mikadocs.OEE.Test
                 new ProductionStopRegistration(new ProductionStop("Test 2", true), new TimeSpan(1, 0, 0)),
                 new ProductionStopRegistration(new ProductionStop("Test 3", false), new TimeSpan(0, 15, 0)),
                 new ProductionStopRegistration(new ProductionStop("Test 4", true), new TimeSpan(0, 5, 0))
-            }, 1100, 10));
+            }, 1100, 10), p => p.Planned);
 
             Assert.AreEqual<double>(0.5, calculator.Performance);
             Assert.AreEqual<TimeSpan>(new TimeSpan(5, 30, 0), calculator.Duration);
@@ -249,7 +249,7 @@ namespace Mikadocs.OEE.Test
         {
             FactorCalculator calculator = new FactorCalculator(new LocalProduction(new TimeSpan(5, 30, 0), new ProductionStopRegistration[] 
             {                 
-            }, 0, 10));
+            }, 0, 10), p => p.Planned);
 
             Assert.AreEqual<double>(0, calculator.Performance);
             Assert.AreEqual<TimeSpan>(new TimeSpan(5, 30, 0), calculator.Duration);
@@ -264,7 +264,7 @@ namespace Mikadocs.OEE.Test
                 new ProductionStopRegistration(new ProductionStop("Test 2", true), new TimeSpan(1, 25, 0)),
                 new ProductionStopRegistration(new ProductionStop("Test 3", false), new TimeSpan(1, 20, 0)),
                 new ProductionStopRegistration(new ProductionStop("Test 4", true), new TimeSpan(1, 20, 0))
-            }, 0, 10));
+            }, 0, 10), p => p.Planned);
 
             Assert.AreEqual<double>(0, calculator.Performance);
             Assert.AreEqual<TimeSpan>(new TimeSpan(5, 30, 0), calculator.Duration);
@@ -279,7 +279,7 @@ namespace Mikadocs.OEE.Test
                 new ProductionStopRegistration(new ProductionStop("Test 2", true), new TimeSpan(1, 25, 0)),
                 new ProductionStopRegistration(new ProductionStop("Test 3", false), new TimeSpan(1, 20, 0)),
                 new ProductionStopRegistration(new ProductionStop("Test 4", true), new TimeSpan(1, 20, 0))
-            }, 10, 10));
+            }, 10, 10), p => p.Planned);
 
             Assert.AreEqual<double>(0, calculator.Performance);
             Assert.AreEqual<TimeSpan>(new TimeSpan(5, 30, 0), calculator.Duration);
@@ -288,7 +288,7 @@ namespace Mikadocs.OEE.Test
         [TestMethod]
         public void TopQuaility()
         {
-            FactorCalculator calculator = new FactorCalculator(new LocalProduction(100, 0));
+            FactorCalculator calculator = new FactorCalculator(new LocalProduction(100, 0), p => p.Planned);
 
             Assert.AreEqual<double>(1, calculator.Quality);
             Assert.AreEqual<TimeSpan>(new TimeSpan(0, 0, 0), calculator.Duration);
@@ -297,7 +297,7 @@ namespace Mikadocs.OEE.Test
         [TestMethod]
         public void OrdinaryQuaility()
         {
-            FactorCalculator calculator = new FactorCalculator(new LocalProduction(100, 25));
+            FactorCalculator calculator = new FactorCalculator(new LocalProduction(100, 25), p => p.Planned);
 
             Assert.AreEqual<double>(0.75, calculator.Quality);
             Assert.AreEqual<TimeSpan>(new TimeSpan(0, 0, 0), calculator.Duration);
@@ -306,7 +306,7 @@ namespace Mikadocs.OEE.Test
         [TestMethod]
         public void AllFailed()
         {
-            FactorCalculator calculator = new FactorCalculator(new LocalProduction(100, 100));
+            FactorCalculator calculator = new FactorCalculator(new LocalProduction(100, 100), p => p.Planned);
 
             Assert.AreEqual<double>(0, calculator.Quality);
             Assert.AreEqual<TimeSpan>(new TimeSpan(0, 0, 0), calculator.Duration);
@@ -315,17 +315,17 @@ namespace Mikadocs.OEE.Test
         [TestMethod]
         public void ComputeWeightedAverageOverFactorCalculators()
         {
-            FactorCalculator calculator1 = new FactorCalculator(new LocalProduction(new TimeSpan(5, 0, 0), new ProductionStopRegistration[] { }));
-            FactorCalculator calculator2 = new FactorCalculator(new LocalProduction(new TimeSpan(5, 0, 0), new ProductionStopRegistration[] { }));
-            FactorCalculator calculator3 = new FactorCalculator(new LocalProduction(new TimeSpan(5, 0, 0), new ProductionStopRegistration[] { }));
-            FactorCalculator calculator4 = new FactorCalculator(new LocalProduction(new TimeSpan(5, 0, 0), new ProductionStopRegistration[] { }));
+            FactorCalculator calculator1 = new FactorCalculator(new LocalProduction(new TimeSpan(5, 0, 0), new ProductionStopRegistration[] { }), p => p.Planned);
+            FactorCalculator calculator2 = new FactorCalculator(new LocalProduction(new TimeSpan(5, 0, 0), new ProductionStopRegistration[] { }), p => p.Planned);
+            FactorCalculator calculator3 = new FactorCalculator(new LocalProduction(new TimeSpan(5, 0, 0), new ProductionStopRegistration[] { }), p => p.Planned);
+            FactorCalculator calculator4 = new FactorCalculator(new LocalProduction(new TimeSpan(5, 0, 0), new ProductionStopRegistration[] { }), p => p.Planned);
             FactorCalculator calculator5 = new FactorCalculator(new LocalProduction(new TimeSpan(10, 0, 0), new ProductionStopRegistration[] 
             { 
                 new ProductionStopRegistration(new ProductionStop("Test 1"), new TimeSpan(4, 30, 0)),
                 new ProductionStopRegistration(new ProductionStop("Test 2", false), new TimeSpan(1, 0, 0)),
                 new ProductionStopRegistration(new ProductionStop("Test 3", false), new TimeSpan(0, 30, 0)),
                 new ProductionStopRegistration(new ProductionStop("Test 4", false), new TimeSpan(4, 0, 0))
-            }));
+            }), p => p.Planned);
 
             List<FactorCalculator> calculators = new List<FactorCalculator>(new []{ calculator1, calculator2, calculator3, calculator4});
 
