@@ -20,7 +20,7 @@ namespace Mikadocs.OEE
             get
             {
                 if (IsZero(PlannedProductionTimeInMinutes))
-                    return 0;
+                    return 1;
                 return OperatingTimeInMinutes / PlannedProductionTimeInMinutes;
             }
         }
@@ -74,6 +74,7 @@ namespace Mikadocs.OEE
 
             return (denominator > 0) ? counter/denominator : 0;
         }
+
         private TimeSpan PlannedProductionTime
         {
             get
