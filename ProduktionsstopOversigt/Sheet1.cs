@@ -54,6 +54,8 @@ namespace ProduktionsstopOversigt
 
         private void generateButton_Click(object sender, EventArgs e)
         {
+            ClearSheet();
+
             var stops = RetreiveStops(periodStartDateTimePicker.Value, periodEndDateTimePicker.Value);
 
             var row = 4;
@@ -68,6 +70,21 @@ namespace ProduktionsstopOversigt
             }
 
 
+        }
+
+        private void ClearSheet()
+        {
+            int row = 4;
+            while (true)
+            {
+                if (string.IsNullOrEmpty(this.Range["A" + row, "A" + row].Value2))
+                    break;
+
+                this.Range["A" + row, "A" + row].Value2 = "";
+                this.Range["B" + row, "B" + row].Value2 = "";
+                this.Range["C" + row, "C" + row].Value2 = "";
+                row++;
+            }
         }
 
         private IEnumerable<Tuple<string, int, int>> RetreiveStops(DateTime start, DateTime end)
