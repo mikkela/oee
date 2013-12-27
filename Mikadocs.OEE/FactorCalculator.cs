@@ -59,16 +59,23 @@ namespace Mikadocs.OEE
             get { return production.Duration; }
         }
 
+        public bool IsAnyProduced()
+        {
+            return !IsZero(TotalPieces);
+        }
+
         public delegate double GetAverageValue(FactorCalculator factorCalculator);
 
-        public static double ComputedWeightedAverage(IEnumerable<FactorCalculator> calculators, GetAverageValue callback)
+        public static double ComputedWeightedAverage(IEnumerable<FactorCalculator> calculators, Func<FactorCalculator, double> calculator, Predicate<FactorCalculator> includeFactorCalculator)
         {
             double denominator = 0;
             double counter = 0;
 
             foreach (FactorCalculator factorCalculator in calculators)
             {
-                counter += callback(factorCalculator)*factorCalculator.Duration.TotalMinutes;
+                if (!includeFactorCalculator(factorCalculator))
+                    continue;
+                counter += calculator(factorCalculator)*factorCalculator.Duration.TotalMinutes;
                 denominator += factorCalculator.Duration.TotalMinutes;
             }
 

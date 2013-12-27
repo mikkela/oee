@@ -73,9 +73,9 @@ namespace Mikadocs.OEE.ManagementConsole
 
             IEnumerable<FactorCalculator> calculators = productions.Select(p => new FactorCalculator(p, IsPlanned));
 
-            double availability = FactorCalculator.ComputedWeightedAverage(calculators, c => c.Availability);
-            double performance = FactorCalculator.ComputedWeightedAverage(calculators, c => c.Performance);
-            double quality = FactorCalculator.ComputedWeightedAverage(calculators, c => c.Quality);
+            double availability = FactorCalculator.ComputedWeightedAverage(calculators, c => c.Availability, p=>true);
+            double performance = FactorCalculator.ComputedWeightedAverage(calculators, c => c.Performance, p=>true);
+            double quality = FactorCalculator.ComputedWeightedAverage(calculators, c => c.Quality, p=>p.IsAnyProduced() );
 
             DisplayFactors(availability,
                            performance,

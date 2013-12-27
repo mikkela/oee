@@ -331,13 +331,13 @@ namespace Mikadocs.OEE.Test
 
             Assert.AreEqual<double>(1,
                                     FactorCalculator.ComputedWeightedAverage(calculators,
-                                                                             p => p.Availability));
+                                                                             p => p.Availability, p => true));
                                                                              
 
             calculators.Add(calculator5);
             Assert.AreEqual<double>(2.0/3.0,
                                     FactorCalculator.ComputedWeightedAverage(calculators,
-                                                                             p => p.Availability));
+                                                                             p => p.Availability, p=>true));
         }
     }
 }
